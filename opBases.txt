@@ -1,0 +1,13 @@
+Soutenances : semaine du 5 novembre 
+Envoyer rapport semaine du 29 
+
+Graphe : 
+n : int = nb de sommets 
+m : int* =  tableau du nombre d'arête par sommet 
+lSommets : int* = tableau de sommmets 
+lAdjacence : int ** = tableau d'arcs par sommet 
+
+lSommets = tableau de nombres représentant les sommets 
+lAdjacence = tableau contenant les liste d'adjacence associé 
+à chaque 
+

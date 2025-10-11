@@ -13,7 +13,7 @@ CFLAGS  = -Wall -I. -g -Wextra -pedantic -Wno-unused-parameter
 # -I permet de prendre en compte tout les fichiers qui sont contenus dans les
 # sous-dossiers contenus après le -I, dans ce cas tout les sous-dossiers
 
-FILES = operationGraph
+FILES = operationGraph operationTableau
 # L'ensemble des noms des fichiers intermédiaires 
 
 SRCS = $(patsubst %, $(SRC_DIR)/%.c, $(FILES))

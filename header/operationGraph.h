@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include "./header/operationTableau.h"
 
 typedef struct _graph {
     int nbSommets ; 
@@ -11,5 +13,8 @@ typedef struct _graph {
 Graph *lireGraph (FILE *f) ; 
 int ecrireGraph (FILE *f, Graph *g) ; 
 void libereGraph (Graph *g) ; 
-int *supprimePremierEl (int* tab, int len, int e, int *index) ; 
-void afficheTab (int *tab, int len) ; 
+Graph *creeGraph(int n) ; 
+Graph *genereGraphAlea (int n, float p) ; 
+void afficheGraph(Graph *g) ; 
+Graph *copieGraph (Graph *g) ; 
+Graph *retireSommet (Graph *G, int v) ; 

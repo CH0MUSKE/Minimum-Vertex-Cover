@@ -2,23 +2,30 @@
 #include <stdio.h>
 
 int main(int argc, char** argv) {
-	Graph *g = genereGraphAlea(7, (float) 1) ; 
-	afficheGraph(g) ; 
-	Graph *gp = retireSommet(g, 1) ; 
+	Graph *g = genereGraphAlea(2, (float) 1) ; 
+	int *tab = malloc(sizeof(int) * 3) ; 
+	tab[0] = 0 ; 
+	tab[1] = 1 ; 
+	tab[2] = 5 ; 
+	Graph *gp  ; 
+	gp = retireEnsembleSommet(g, tab, 3) ; 
 	afficheGraph(gp) ; 
-	gp = retireSommet(gp, 1) ; 
-	afficheGraph(gp) ;
 	/*
-	int *tab = malloc(sizeof(int) * 5) ; 
-	for (int i = 0 ; i < 5 ; i++)
+	gp = retireEnsembleSommet(g, tab, 3)  ; 
+    
+	
+	int taille = 5 ; 
+	int *tab = malloc(sizeof(int) * taille) ; 
+	for (int i = 0 ; i < taille ; i++)
 	{
 		tab[i] = i ; 
 	}
-	afficheTab(tab, 5) ; 
+	afficheTab(tab, taille) ; 
 	int *t ; 
-	int *k = retireValTabIndex(tab, 5, 2, t) ; 
-	afficheTab(k, 5) ; 
+	int *k = retireValTabIndex(tab, taille, 0, t) ; 
+	printf("%d\n", k) ; 
+	afficheTab(k, taille) ; 
+	printf("--------------------\n") ; 
 	*/
-    
     return 0 ; 
 }

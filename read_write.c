@@ -9,12 +9,19 @@ typedef struct _graph
     int nbSommets;
     int nbAretes;
     int *degreSommet;
-    int *tabSomets;
+    int *tabSommets;
     int **tabAdjacence;
 }Graph;
 
 
 
+
+int free_tab(int **tab, size_t n){
+    for(int i = 0; i < n; i++){
+        free(tab[i]);
+    }
+    free(tab);
+}
 
 int map_indice_sommet(int nbSommets,int *tabSommets, int sommet){
     for(size_t i = 0; i < nbSommets; i++){
@@ -28,7 +35,7 @@ int map_indice_sommet(int nbSommets,int *tabSommets, int sommet){
 int degre_sommet(int sommet, Graph *g){
     int n = 0;
     int nbSommets = g -> nbSommets;
-    int indice_sommet = map_indice_sommet(nbSommets, g -> tabSomets, sommet);
+    int indice_sommet = map_indice_sommet(nbSommets, g -> tabSommets, sommet);
     if(indice_sommet == -1) return -1;
     for(int i = 0; i < nbSommets; i++){
         if(g -> tabAdjacence[indice_sommet][i] == 1){
@@ -38,10 +45,30 @@ int degre_sommet(int sommet, Graph *g){
     return n;
 }
 
+int **mat_adj_to_liste_adj(Graph *g){
+    int **tabAdjacence = g -> tabAdjacence;
+    int *tabSommet = g -> tabSommets;
+    int *degreSommet = g -> degreSommet;
+    int **list_adj = malloc(sizeof(int *) * g -> nbSommets);
+    for(int i = 0; i < g -> nbSommets; i++){
+        list_adj[i] = malloc(sizeof(int) * degreSommet[i]);
+        int k = 0;
+        for(int j  = 0; j < g -> nbSommets; j++){
+            if(tabAdjacence[i][j] == 1){
+                list_adj[i][k] = tabSommet[j];
+                printf("-%d %d-",list_adj[0][0], list_adj[0][1]);
+                k++;
+            }
+        }
+    }
+
+    return list_adj;
+}
+
 int ajout_degre_tous_sommets(Graph *g){
     int nbSommets = g -> nbSommets;
     for(int i = 0; i < nbSommets; i++){
-        int n = degre_sommet(g -> tabSomets[i], g);
+        int n = degre_sommet(g -> tabSommets[i], g);
         if(n == -1) return 1;
         g ->degreSommet[i] = n;
     }
@@ -50,8 +77,8 @@ int ajout_degre_tous_sommets(Graph *g){
 }
 
 int ajout_arete(Graph *g, int sommetA, int sommetB){
-    int ia = map_indice_sommet(g ->nbSommets,g -> tabSomets,sommetA);
-    int ib = map_indice_sommet(g ->nbSommets,g -> tabSomets,sommetB);
+    int ia = map_indice_sommet(g ->nbSommets,g -> tabSommets,sommetA);
+    int ib = map_indice_sommet(g ->nbSommets,g -> tabSommets,sommetB);
     if(ia == -1 || ib == -1){
         return 1;
     }
@@ -80,7 +107,7 @@ int gerer_ligne(unsigned int i, char *line, Graph *g){
             int n = gestion_erreur_strtol(line);
             if(n == -1) return 0;
             g -> nbSommets = n;
-            g -> tabSomets = malloc(sizeof(int) * n);
+            g -> tabSommets = malloc(sizeof(int) * n);
             g -> tabAdjacence = malloc(sizeof(int *) * n);
             g -> degreSommet = malloc(sizeof(int) * n);
             for(int i = 0; i < n; i++){
@@ -94,7 +121,7 @@ int gerer_ligne(unsigned int i, char *line, Graph *g){
             if(i <= 2 + nb_s){
                 int n = gestion_erreur_strtol(line);
                 if(n == -1) return 0;
-                g -> tabSomets[i-3] = n;
+                g -> tabSommets[i-3] = n;
                 break;
             }
             if(i == 3 + nb_s){
@@ -119,7 +146,12 @@ int gerer_ligne(unsigned int i, char *line, Graph *g){
             int x = ajout_arete(g,a,b);
             free(cpy);
             if(x == 1) return 0;
-            if(ajout_degre_tous_sommets(g) == 1) return 0;
+            if(i == 5 + g -> nbAretes + g -> nbSommets){
+                if(ajout_degre_tous_sommets(g) == 1) return 0;
+                int **list_adj = mat_adj_to_liste_adj(g);
+                free_tab(g -> tabAdjacence, g -> nbSommets);
+                g -> tabAdjacence = list_adj;
+            }
             break;
         }
     }
@@ -127,7 +159,16 @@ int gerer_ligne(unsigned int i, char *line, Graph *g){
 }
 
 Graph *lireGraph(char *f){
-    int fd = open(f,O_RDONLY,0700);
+    int fd = open(f,O_RDWR,0700);
+    if(lseek(fd,0,SEEK_END) < 0){
+        goto end;
+    }
+    if(write(fd,"\n",1) < 0){
+        goto end;
+    }
+    if(lseek(fd,0,SEEK_SET) < 0){
+        goto end;
+    }
     char buf[520]; 
     int r = 0;
     char *carry = NULL;
@@ -189,7 +230,7 @@ void printGraph(Graph *g){
 
     printf("Sommets\n");
     for (int i = 0; i < g->nbSommets; i++) {
-        printf("%d\n", g->tabSomets[i]);
+        printf("%d\n", g->tabSommets[i]);
     }
 
     printf("Nombre d aretes\n");
@@ -199,7 +240,7 @@ void printGraph(Graph *g){
     for (int i = 0; i < g->nbSommets; i++) {
         for (int j = i + 1; j < g->nbSommets; j++) {
             if (g->tabAdjacence[i][j] == 1) {
-                printf("%d %d\n", g->tabSomets[i], g->tabSomets[j]);
+                printf("%d %d\n", g->tabSommets[i], g->tabSommets[j]);
             }
         }
     }
@@ -225,7 +266,7 @@ int ecrireGraph(Graph *g,char *nom){
         goto end;
     }
     for(int i = 0; i < nbSommets; i++){
-        sprintf(buf,"%d\n",g ->tabSomets[i]);
+        sprintf(buf,"%d\n",g ->tabSommets[i]);
         if(write(fd,buf,strlen(buf)) < 0){
             r = 1;
             goto end;
@@ -246,9 +287,9 @@ int ecrireGraph(Graph *g,char *nom){
     }
     char buf2[25];
     for (int i = 0; i < nbSommets; i++){
-        for (int j = i + 1;j< nbSommets; j++){
-            if (g->tabAdjacence[i][j] == 1){
-                sprintf(buf2,"%d %d\n", g->tabSomets[i], g->tabSomets[j]);
+        for (int j = 0 ;j< g -> degreSommet[i]; j++){
+            if(g->tabSommets[i] < g->tabAdjacence[i][j]){
+                sprintf(buf2,"%d %d\n", g->tabSommets[i], g->tabAdjacence[i][j]);
                 if(write(fd,buf2,strlen(buf2)) < 0){
                     r = 1;
                     goto end;
@@ -267,5 +308,5 @@ int main(){
     for(int i = 0; i < g -> nbSommets; i++){
         printf("%d\n",g -> degreSommet[i]);
     }
-    return ecrireGraph(g,"graph2.txt");
+    return ecrireGraph(g,"graph3.txt");
 }

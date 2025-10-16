@@ -33,8 +33,8 @@ int main(int argc, char** argv) {
 		afficheTab(tab2, taille2) ; 
 		*/
 
-		libereGraph(g) ; 
-		libereGraph(gp) ; 
+		freeGraph(g) ; 
+		freeGraph(gp) ; 
 		free(tab1) ; 
 		free(tab2) ; 
 		

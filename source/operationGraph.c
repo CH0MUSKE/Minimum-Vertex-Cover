@@ -35,7 +35,7 @@ Graph *genereGraphAlea (int n, float p) {
         /*
         if (!res->tabAdjacence[i]){
             printf("Erreur creation graphe\n") ; 
-            libereGraph(res) ; 
+            freeGraph(res) ; 
             return NULL ; 
         }
         */
@@ -88,7 +88,7 @@ Graph *creeGraph(int n) {
     return res ; 
 }
 
-void libereGraph (Graph *g) {
+void freeGraph (Graph *g) {
     if (g) {
         free(g->degreSommet) ; 
         free(g->tabSommets) ; 
@@ -152,7 +152,7 @@ Graph *retireSommet (Graph *G, int v) {
     
     Graph *res = copieGraph(G) ; 
     
-	libereGraph(G) ; 
+	freeGraph(G) ; 
 	int posValSupprimer = calculeIndexValeur(res->tabSommets, res->nbSommets, v) ; 
 	if (posValSupprimer != -1 && res->nbSommets > 1) {
         // Etape 2 
@@ -196,7 +196,7 @@ Graph *retireSommet (Graph *G, int v) {
         
 	}
     else if (posValSupprimer != -1 && res->nbSommets == 1) {
-        libereGraph(res) ; 
+        freeGraph(res) ; 
         res = NULL ; 
     }
 	return res ; 
@@ -204,7 +204,7 @@ Graph *retireSommet (Graph *G, int v) {
 
 Graph *retireEnsembleSommet (Graph *g, int *tab, int len) {
     Graph *res = copieGraph(g) ; 
-    libereGraph(g) ; 
+    freeGraph(g) ; 
     for (int i = 0 ; i < len ; i++) {
         
         if (res) {
@@ -303,7 +303,7 @@ int *algoCouplage(Graph *G, int *tailleCouverture) {
             }
         }
     }
-    libereGraph(grapheCourant) ; 
+    freeGraph(grapheCourant) ; 
     C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
     return C ; 
 } 
@@ -325,7 +325,7 @@ int *algoGlouton(Graph *G, int *tailleCouverture) {
         nbSommetsCouverture += 1 ; 
     }
     if (grapheCourant) {
-        libereGraph(grapheCourant) ; 
+        freeGraph(grapheCourant) ; 
     }
     C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
     return C ; 

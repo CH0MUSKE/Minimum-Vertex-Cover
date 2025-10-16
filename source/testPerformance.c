@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
         }
         */
     for (int i = 0 ; i < 4 ; i++) {
-        int tMax = tailleMaxGraphe (((double) i)/2.0, 0.5, 50) ; 
+        int tMax = tailleMaxGraphe (((double) i)/2.0, 0.5, 50, algoCouplage) ; 
         printf("DureeMax : %.3f, TailleMax : %d\n", ((double) i)/2.0, tMax) ; 
     }
     return 0 ; 

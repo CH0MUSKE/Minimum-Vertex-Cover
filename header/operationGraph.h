@@ -26,8 +26,8 @@ typedef struct _couverture {
 } Couverture ; 
 
 
-// Libère le graphe passè en parametre 
-void libereGraph (Graph *G) ; 
+// Libère le graphe passé en paramètre 
+void freeGraph (Graph *G) ; 
 
 // Crée un graphe ayant n sommets 
 Graph *creeGraph(int n) ; 
@@ -55,3 +55,10 @@ int *algoGlouton(Graph *G, int *tailleCouverture) ;
 
 // Retourne le sommet de degré maximum de G 
 int indexSommetDegMax (Graph *G) ; 
+
+// Ecrit le graphe passé en paramètre dans un fichier texte 
+int ecrireGraph(char *nom, Graph *g) ; 
+
+
+// Lit le graphe contenu dans le ficier passé en paramètre 
+Graph *lireGraph(char *f) ; 

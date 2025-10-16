@@ -38,7 +38,10 @@ all: $(OBJS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) -c $(CFLAGS) -c $< -o $@
 
-test1 : $(OBJS) $(OBJ_DIR)/test1.o 
+testGraphe : $(OBJS) $(OBJ_DIR)/testGraphe.o 
+	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
+
+testTableau : $(OBJS) $(OBJ_DIR)/testTableau.o 
 	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
 
 stu : 

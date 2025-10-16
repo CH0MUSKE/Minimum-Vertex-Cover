@@ -27,7 +27,6 @@ void afficheTab (int *tab, int len) {
             printf("%d, ", tab[i]) ; 
         }
         if (len > 0) {
-            
             printf("%d\n", tab[len - 1]) ; 
         }
         else {
@@ -80,6 +79,8 @@ int *supprimePremierEl (int* tab, int len, int e, int *posElt) {
         for (int i = 0 ; i < len ; i++) {
             res[i] = tab[i] ; 
         }
+        free(tab) ; 
+        printf("Error 2\n") ; 
 
     }
     
@@ -114,9 +115,7 @@ int *retireValTabIndex(int *tab, int len, int index, int *estSupprime) {
         *estSupprime = 1 ; 
         res = copieTab(tab, len) ; 
     }
-    afficheTab(tab, len) ; 
     free(tab) ; 
-    printf("--------------------\n") ; 
     return res ; 
 }
 
@@ -128,6 +127,7 @@ int rechercheIter (int *tab, int len, int e) {
             return i ; 
         }
     }
+    printf("Error 3\n") ; 
     return -1 ; 
 }
 
@@ -159,4 +159,14 @@ void free_tab(int **tab, size_t n){
         free(tab[i]);
     }
     free(tab);
+}
+int calculeIndexValeur(int*tab, int len, int v) {
+    if (tab && len) {
+        for (int i = 0 ; i < len ; i++) {
+            if (tab[i] == v) {
+                return i ; 
+            }
+        }
+    }
+    return -1 ; 
 }

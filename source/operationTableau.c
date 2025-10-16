@@ -169,6 +169,12 @@ int *raccourcitListe (int *tab, int len, int *newLen) {
     return NULL ;     
 }
 
+void free_tab(int **tab, size_t n){
+    for(int i = 0; i < n; i++){
+        free(tab[i]);
+    }
+    free(tab);
+}
 int calculeIndexValeur(int*tab, int len, int v) {
     if (tab && len) {
         for (int i = 0 ; i < len ; i++) {

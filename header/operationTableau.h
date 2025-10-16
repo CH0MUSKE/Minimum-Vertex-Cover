@@ -34,5 +34,6 @@ int rechercheIter (int *tab, int len, int e) ;
 // Détruit la liste passé en paramètre 
 int *raccourcitListe (int *tab, int len, int *newLen) ; 
 
+void freeTab(int **tab, size_t n);
 // Retourne la position de v dans tab 
 int calculeIndexValeur(int*tab, int len, int v) ; 

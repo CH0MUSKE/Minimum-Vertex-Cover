@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include "./header/operationTableau.h"
 
 typedef struct _graph {
@@ -13,6 +16,10 @@ typedef struct _graph {
 // Un graphe vide est un graphe n'ayant pas de sommets 
 // On suppose que un graphe vide est représenté par NULL 
 
+typedef struct solution{
+    int cardinal;
+    int *couverture;
+}solution;
 
 typedef struct _couverture {
     int *listeSommets ; 

@@ -13,7 +13,7 @@ CFLAGS  = -Wall -I. -g -Wextra -pedantic -Wno-unused-parameter
 # -I permet de prendre en compte tout les fichiers qui sont contenus dans les
 # sous-dossiers contenus après le -I, dans ce cas tout les sous-dossiers
 
-FILES = operationGraph operationTableau
+FILES = operationGraph operationTableau mesureFonction
 # L'ensemble des noms des fichiers intermédiaires 
 
 SRCS = $(patsubst %, $(SRC_DIR)/%.c, $(FILES))
@@ -42,6 +42,9 @@ testGraphe : $(OBJS) $(OBJ_DIR)/testGraphe.o
 	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
 
 testTableau : $(OBJS) $(OBJ_DIR)/testTableau.o 
+	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
+
+testPerformance : $(OBJS) $(OBJ_DIR)/testPerformance.o 
 	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
 
 stu : 

@@ -45,6 +45,11 @@ int *copieTab (int *tab, int len) {
             res[i] = tab[i] ; 
         }
     }
+    else if (!res) {
+        printf("Critical copy error\n") ; 
+        return NULL ; 
+    }
+    
     else {
         free(res) ; 
         return NULL ; 
@@ -63,12 +68,19 @@ int *supprimePremierEl (int* tab, int len, int e, int *posElt) {
             int q = 0 ; 
             for (int i = 0 ; i < len ; i++) {
                 if (index != i) {
+                    if (!res) {
+                        printf("BABA %d\n", len - 1) ; 
+                    }
                     res[i - q] = tab[i] ; 
                 }
                 else {
                     q = 1 ; 
                 }
             }
+            // GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOD DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMMIT
+            // forgot to put free(tab) :)))))))))))))))))
+            // lost 2 hours but that's fine :))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+            free(tab) ; 
         }
         else {
             free(tab) ; 
@@ -133,25 +145,28 @@ int rechercheIter (int *tab, int len, int e) {
 
 int *raccourcitListe (int *tab, int len, int *newLen) {
     *newLen = len ; 
-    for (int i = 0 ; i < len ; i++) {
-        if (tab[i] == -1) {
-            *newLen = i ; 
-            break ;
+    if (tab) {
+        for (int i = 0 ; i < len ; i++) {
+            if (tab[i] == -1) {
+                *newLen = i ; 
+                break ;
+            }
+        }
+        if (!*newLen) {
+            free(tab) ;
+            return NULL ; 
+        }
+        else {
+            int *res = malloc(sizeof(int) * (*newLen)) ; 
+            for (int i = 0 ; i < *newLen ; i++) {
+                res[i] = tab[i] ; 
+            }
+            free(tab) ; 
+            return res ; 
         }
     }
-    if (!*newLen) {
-        free(tab) ;
-        return NULL ; 
-    }
-    else {
-        int *res = malloc(sizeof(int) * (*newLen)) ; 
-        for (int i = 0 ; i < *newLen ; i++) {
-            res[i] = tab[i] ; 
-        }
-        free(tab) ; 
-        return res ; 
-    }
-    
+    *newLen = -1 ; 
+    return NULL ;     
 }
 
 int calculeIndexValeur(int*tab, int len, int v) {

@@ -32,6 +32,13 @@ Graph *genereGraphAlea (int n, float p) {
         res->tabSommets[i] = i ; 
         res->degreSommet[i] = res->nbSommets - 1 ; 
         res->tabAdjacence[i] = malloc(sizeof(int) * res->degreSommet[i]) ; 
+        /*
+        if (!res->tabAdjacence[i]){
+            printf("Erreur creation graphe\n") ; 
+            libereGraph(res) ; 
+            return NULL ; 
+        }
+        */
         for (int j = 0 ; j < res->degreSommet[i] ; j++) {
             res->tabAdjacence[i][j] = -1 ; 
         }
@@ -66,7 +73,7 @@ Graph *genereGraphAlea (int n, float p) {
         res->nbAretes += temp ; 
     }
     free(nbArreteCourant) ; 
-    
+    res->nbAretes = res->nbAretes / 2; 
     return res ;         
 }
 
@@ -97,20 +104,26 @@ void libereGraph (Graph *g) {
 }
 
 Graph *copieGraph (Graph *g) {
-    Graph *res = creeGraph(g->nbSommets) ; 
-    res->nbAretes = g->nbAretes ; 
-    res->degreSommet = copieTab(g->degreSommet, g->nbSommets) ; 
-    res->tabSommets = copieTab(g->tabSommets, g->nbSommets) ; 
-    res->tabAdjacence = malloc(sizeof(int*)*g->nbSommets) ; 
+    if(g) {
+        Graph *res = creeGraph(g->nbSommets) ; 
+        res->nbAretes = g->nbAretes ; 
+        res->degreSommet = copieTab(g->degreSommet, g->nbSommets) ; 
 
-    for (int i = 0 ; i < g->nbSommets ; i++) {
-        res->tabAdjacence[i] = copieTab(g->tabAdjacence[i], g->degreSommet[i]) ; 
+        res->tabSommets = copieTab(g->tabSommets, g->nbSommets) ; 
+        res->tabAdjacence = malloc(sizeof(int*)*g->nbSommets) ; 
+        
+        for (int i = 0 ; i < g->nbSommets ; i++) {
+            
+            res->tabAdjacence[i] = copieTab(g->tabAdjacence[i], g->degreSommet[i]) ; 
+        }
+        return res ; 
     }
-    return res ; 
+    return NULL ; 
 }
 
 void afficheGraph(Graph *g) {
     if (g) {
+        printf("NbSommets : %d, NbAretes : %d\n", g->nbSommets, g->nbAretes) ; 
         printf("Tableau des sommets : ") ; 
         afficheTab(g->tabSommets, g->nbSommets) ; 
     
@@ -136,18 +149,18 @@ Graph *retireSommet (Graph *G, int v) {
 	3. Détruire la liste des adjacents du sommet v 
 	*/
 
+    
     Graph *res = copieGraph(G) ; 
+    
 	libereGraph(G) ; 
 	int posValSupprimer = calculeIndexValeur(res->tabSommets, res->nbSommets, v) ; 
-    //printf("---------------- 3\n") ; 
 	if (posValSupprimer != -1 && res->nbSommets > 1) {
         // Etape 2 
 		int temp ; 
         
 		for (int i = 0 ; i < res->degreSommet[posValSupprimer] ; i++) {
             int posSommetAdj = calculeIndexValeur(res->tabSommets, res->nbSommets, res->tabAdjacence[posValSupprimer][i]) ; 
-            //printf("---------------- 3e\n") ; 
-            afficheTab(res->tabAdjacence[posSommetAdj], res->degreSommet[posSommetAdj]) ; 
+            
         
 			res->tabAdjacence[posSommetAdj] = 
             supprimePremierEl(res->tabAdjacence[posSommetAdj], res->degreSommet[posSommetAdj], v, &temp) ; 
@@ -179,6 +192,8 @@ Graph *retireSommet (Graph *G, int v) {
         res->tabAdjacence = listAdj ; 
         res->tabSommets = retireValTabIndex(res->tabSommets, res->nbSommets, posValSupprimer, &temp) ; 
 		res->nbSommets -= 1 ; 
+        
+        
 	}
     else if (posValSupprimer != -1 && res->nbSommets == 1) {
         libereGraph(res) ; 
@@ -188,52 +203,93 @@ Graph *retireSommet (Graph *G, int v) {
 }
 
 Graph *retireEnsembleSommet (Graph *g, int *tab, int len) {
-    Graph *prec = g ; 
-    Graph *suiv = NULL ; 
+    Graph *res = copieGraph(g) ; 
+    libereGraph(g) ; 
     for (int i = 0 ; i < len ; i++) {
-        //printf("---------------- 2\n") ; 
-        if (prec) {
-            suiv = retireSommet(prec, tab[i]) ; 
-            prec = suiv ; 
+        
+        if (res) {
+            res = retireSommet(res, tab[i]) ; 
         }
         else {
-            return prec ; 
+            return res ; 
         }
-        //printf("---------------- 2e\n") ; 
-        afficheGraph(suiv) ; 
     }
-    return suiv ; 
+    return res ; 
 }
 
 int *algoCouplage(Graph *G, int *tailleCouverture) {
     int *C = malloc(sizeof(int) * G->nbSommets) ; 
+    int tailleSup = G->nbSommets ; 
     int nbSommetsCouverture = 0 ; 
     for (int i = 0 ; i < G->nbSommets ; i++) {
         C[i] = -1 ; 
     }
     Graph *grapheCourant = copieGraph(G) ; 
+    
     for (int i = 0 ; i < grapheCourant->nbSommets ; i++) {
-        
-        if (grapheCourant->nbAretes > 0) {
+        if (grapheCourant->nbAretes > 0) {    
             for (int j = 0 ; j < grapheCourant->degreSommet[i] ; j++) {
+                
                 int *aRetirer = malloc(sizeof(int) * 2) ; 
                 aRetirer[0] = grapheCourant->tabSommets[i] ; 
                 aRetirer[1] = grapheCourant->tabAdjacence[i][j] ; 
-                //printf("---------------- 1\n") ; 
+                
                 grapheCourant = retireEnsembleSommet(
                     grapheCourant, 
                     aRetirer, 
-                    2
-                ) ; 
-                //printf("---------------- 1e\n") ; 
-                C[nbSommetsCouverture] = grapheCourant->tabSommets[i] ; 
-                C[nbSommetsCouverture + 1] = grapheCourant->tabAdjacence[i][j] ; 
+                    2 ) ; 
+                    
+                
+                C[nbSommetsCouverture] = aRetirer[0] ; 
+                C[nbSommetsCouverture + 1] = aRetirer[1] ; 
                 nbSommetsCouverture += 2 ; 
                 i = 0 ; 
+                free(aRetirer) ; 
+                if (!grapheCourant) {
+                    C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
+                    return C ;                         
+                }
+                //afficheGraph(grapheCourant) ; 
             }
         }
-        afficheGraph(G) ; 
     }
-    C = raccourcitListe(C, G->nbSommets, tailleCouverture) ; 
+    libereGraph(grapheCourant) ; 
+    C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
     return C ; 
 } 
+
+
+int *algoGlouton(Graph *G, int *tailleCouverture) {
+    
+    int *C = malloc(sizeof(int) * G->nbSommets) ; 
+    int tailleSup = G->nbSommets ; 
+    int nbSommetsCouverture = 0 ; 
+    for (int i = 0 ; i < G->nbSommets ; i++) {
+        C[i] = -1 ; 
+    }
+    Graph *grapheCourant = copieGraph(G) ; 
+    while (grapheCourant && grapheCourant->nbAretes > 0) {
+        int indexSommetMaximal = indexSommetDegMax(grapheCourant) ; 
+        C[nbSommetsCouverture] = grapheCourant->tabSommets[indexSommetMaximal] ; 
+        grapheCourant = retireSommet(grapheCourant, grapheCourant->tabSommets[indexSommetMaximal]) ; 
+        nbSommetsCouverture += 1 ; 
+    }
+    if (grapheCourant) {
+        libereGraph(grapheCourant) ; 
+    }
+    C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
+    return C ; 
+}
+
+int indexSommetDegMax (Graph *G) {
+    if (G) {
+        int argMax = 0 ; 
+        for (int i = 0; i < G->nbSommets; i++) {
+            if(G->degreSommet[i] > G->degreSommet[argMax]) {
+                argMax = i ; 
+            }
+        }
+        return argMax ; 
+    }
+    return -1 ; 
+}

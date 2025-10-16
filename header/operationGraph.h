@@ -18,14 +18,33 @@ typedef struct _couverture {
     int *listeSommets ; 
 } Couverture ; 
 
-Graph *lireGraph (FILE *f) ; 
-int ecrireGraph (FILE *f, Graph *G) ; 
+
+// Libère le graphe passè en parametre 
 void libereGraph (Graph *G) ; 
+
+// Crée un graphe ayant n sommets 
 Graph *creeGraph(int n) ; 
+
+// Génère un graphe de n sommets, avec une probabilité d'avoir une arête entre deux sommets de p 
 Graph *genereGraphAlea (int n, float p) ; 
+
+// Affiche le graphe passé en paramètre 
 void afficheGraph(Graph *G) ; 
+
+// Copie le graphe passé en paramètre, ne détruit pas le graphe passé en paramètre 
 Graph *copieGraph (Graph *G) ; 
+
+// Retire le sommet de label v du graphe G, détruit le graphe G 
 Graph *retireSommet (Graph *G, int v) ; 
+
+// Retire les sommets donts les labels sont dans tab du graphe G, détruit le graphe G 
 Graph *retireEnsembleSommet (Graph *g, int *tab, int len) ; 
+
+// Calcule une couverture de G
 int *algoCouplage(Graph *G, int *tailleCouverture) ; 
-int *algoGlouton(Graph *G) ; 
+
+// Calcule une couverture de G, avec un algorithme glouton 
+int *algoGlouton(Graph *G, int *tailleCouverture) ; 
+
+// Retourne le sommet de degré maximum de G 
+int indexSommetDegMax (Graph *G) ; 

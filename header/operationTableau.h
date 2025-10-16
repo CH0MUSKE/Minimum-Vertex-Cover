@@ -33,3 +33,5 @@ int rechercheIter (int *tab, int len, int e) ;
 // marqués par -1
 // Détruit la liste passé en paramètre 
 int *raccourcitListe (int *tab, int len, int *newLen) ; 
+
+void freeTab(int **tab, size_t n);

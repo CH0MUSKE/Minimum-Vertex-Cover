@@ -153,3 +153,10 @@ int *raccourcitListe (int *tab, int len, int *newLen) {
     }
     
 }
+
+void free_tab(int **tab, size_t n){
+    for(int i = 0; i < n; i++){
+        free(tab[i]);
+    }
+    free(tab);
+}

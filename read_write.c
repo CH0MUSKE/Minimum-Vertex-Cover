@@ -176,7 +176,7 @@ Graph *lireGraph(char *f){
     Graph *g = malloc(sizeof(Graph));
     unsigned int i = 0;
 
-    while((n = read(fd, buf, 519)) > 0){
+    while((n = read(fd, buf, 1)) > 0){
         char *data;
         buf[n] = '\0';
         if(carry){

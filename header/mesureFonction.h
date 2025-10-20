@@ -1,7 +1,7 @@
 #include <time.h>
 #include "./header/operationGraph.h"
 // On définit cette constante pour un nombre raisonnable de sommets dans un graphe
-#define MAXSOMMETS 100 
+#define MAXSOMMETS 1500
 
 /*
 Mesure le nombre maximum de sommets possibles dans un graphe généré aléatoirement
@@ -13,4 +13,5 @@ le temps total ne peut pas éxéder 180s
 int tailleMaxGraphe (double tempsMax, float p, int pas, int* (*algo) (Graph*, int*)) ; 
 
 // Calcule les nbPoints de temps de l'algorithme non-glouton 
-double *tempsMoyenNonGlouton (int nbGraphes, int nbPoints, double p) ; 
+double *tempsMoyenAlgoCouplage (int nbGraphes, int nbPoints, double p) ; 
+double *tempsMoyenAlgoCouv (int nbGraphes, int nbPoints, double p) ; 

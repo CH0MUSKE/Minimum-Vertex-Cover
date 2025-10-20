@@ -16,6 +16,7 @@ typedef struct _graph {
 // Un graphe vide est un graphe n'ayant pas de sommets 
 // On suppose que un graphe vide est représenté par NULL 
 
+/*
 typedef struct solution{
     int cardinal;
     int *couverture;
@@ -24,6 +25,8 @@ typedef struct solution{
 typedef struct _couverture {
     int *listeSommets ; 
 } Couverture ; 
+
+*/
 
 
 // Libère le graphe passé en paramètre 

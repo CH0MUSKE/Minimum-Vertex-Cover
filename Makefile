@@ -9,7 +9,8 @@ OBJ_DIR = objet
 EXE_DIR = exe
 # Dossier contenant les éxecutables 
 
-CFLAGS  = -Wall -I. -g -Wextra -pedantic -Wno-unused-parameter
+# CFLAGS  = -Wall -I. -g -Wextra -pedantic -Wno-unused-parameter
+CFLAGS  = -Wall -I. -g -Wextra -Wno-unused-parameter
 # -I permet de prendre en compte tout les fichiers qui sont contenus dans les
 # sous-dossiers contenus après le -I, dans ce cas tout les sous-dossiers
 

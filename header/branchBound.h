@@ -1,3 +1,4 @@
+#include <math.h> 
 #include "./header/operationGraph.h"
 
 typedef struct solution{
@@ -10,3 +11,5 @@ typedef struct _couverture {
 } Couverture ; 
 
 solution branchementSimple(Graph *g, int *C, int n) ; 
+solution *copieSolution (solution *s) ; 
+int valeurBorne (Graph *G, solution *couverture) ; 

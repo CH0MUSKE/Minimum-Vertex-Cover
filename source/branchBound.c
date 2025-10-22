@@ -165,6 +165,82 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
     
 }
 
+solution branchementBorneCouplageAmeliore(Graph *g, int *C, int n){
+    printf("--%d--\n",count++);
+    if(g -> nbAretes == 0){
+        solution sol;
+        sol.cardinal = n;
+        sol.couverture = C;
+        if(n < meilleure_solution.cardinal){
+            if(meilleure_solution.couverture != NULL){
+                free(meilleure_solution.couverture);
+            }
+            meilleure_solution = copy_sol(sol);
+        }
+        return sol;
+    }
+    if(testElag(g,n)){
+        solution s;
+        s.cardinal = INT_MAX;
+        s.couverture = NULL;
+        return s;
+    }
+    int x;
+    Graph *h = copieGraph(g);
+    int *sol_realisable = algoCouplage(h,&x);
+    freeGraph(h);
+    solution s;
+    s.cardinal = x;
+    s.couverture = sol_realisable;
+    solution sol = concatene_sol(s,C,n);
+    if(sol.cardinal < meilleure_solution.cardinal){
+        if(meilleure_solution.couverture != NULL){
+            free(meilleure_solution.couverture);
+        }
+        meilleure_solution = copy_sol(sol);
+        free(sol_realisable);
+    }
+
+    int *arete = uneArete(g);
+    int u = arete[0];
+    int v = arete[1];
+    free(arete);
+    Graph *gcpy1 = copieGraph(g);
+    Graph *gcpy5 = copieGraph(g);
+    Graph *g_sans_u = retireSommet(gcpy1,u);
+    Graph *g_sans_v = retireSommet(gcpy5,v);
+    Graph *gcpy4 = copieGraph(g_sans_u);
+    Graph *g_sans_v_u = retireSommet(gcpy4,v);
+    solution voisins_u = voisins(g_sans_v,u);
+    Graph *gcpy2 = copieGraph(g_sans_v_u);
+    Graph *g_sans_v_u_voisins_u = retireEnsembleSommet(gcpy2,voisins_u.couverture,voisins_u.cardinal);
+    int *C_u = malloc(sizeof(int) * (n+1));
+    int *C_v = malloc(sizeof(int) * (n+1 + voisins_u.cardinal));
+    if(C != NULL){
+        memcpy(C_u,C,sizeof(int) * n);
+        memcpy(C_v,C,sizeof(int) * n);
+    }
+    C_u[n] = u;
+    C_v[n] = v;
+    memcpy(C_v + n + 1, voisins_u.couverture,sizeof(int)*voisins_u.cardinal);
+    if(C != NULL){
+        free(C);
+    }
+    solution branche_u = branchementBorneCouplageAmeliore(g_sans_u,C_u,n+1);
+    solution branche_v = branchementBorneCouplageAmeliore(g_sans_v_u_voisins_u,C_v, n+1 + voisins_u.cardinal);
+
+    freeGraph(g_sans_v_u_voisins_u);
+
+    if(branche_u.cardinal < branche_v.cardinal){
+        free(branche_v.couverture);
+        return branche_u;
+    }
+    free(branche_u.couverture);
+    return branche_v;
+    
+}
+
+
 Pile *empile (Pile *p, solution *s) {
     Pile *tete = creeElPile(s) ; 
     tete->suiv = p ; 
@@ -230,3 +306,5 @@ int valeurBorne (Graph *G, solution *couverture) {
         return -1 ; 
     }
 }
+
+

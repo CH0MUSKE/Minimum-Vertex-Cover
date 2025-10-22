@@ -37,13 +37,13 @@ DEPS = $(INC_DIR)/split.h
 all: $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) -c $(CFLAGS) -c $< -o $@
+	$(CC) -c $(CFLAGS) -c $< -o $@ -lm
 
 testGraphe : $(OBJS) $(OBJ_DIR)/testGraphe.o 
-	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
+	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^ -lm
 
 testTableau : $(OBJS) $(OBJ_DIR)/testTableau.o 
-	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
+	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^ -lm
 
 testPerformance : $(OBJS) $(OBJ_DIR)/testPerformance.o 
 	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^ -lm

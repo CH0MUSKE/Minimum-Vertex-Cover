@@ -285,7 +285,7 @@ Couplage couplage(Graph *g) {
 
 
 
-int *algoCouplage(Graph *G, int *tailleCouverture) {
+int *DONOTUSE_algoCouplage(Graph *G, int *tailleCouverture) {
     int *C = malloc(sizeof(int) * G->nbSommets) ; 
     int tailleSup = G->nbSommets ; 
     int nbSommetsCouverture = 0 ; 
@@ -326,8 +326,50 @@ int *algoCouplage(Graph *G, int *tailleCouverture) {
     return C ; 
 } 
 
+solution algoCouplage(Graph *G) {
+    solution res ; 
+    res.couverture = malloc(sizeof(int) * G->nbSommets) ; 
+    res.cardinal = G->nbSommets ; 
+    int nbSommetsCouverture = 0 ; 
+    for (int i = 0 ; i < G->nbSommets ; i++) {
+        res.couverture[i] = -1 ; 
+    }
+    Graph *grapheCourant = copieGraph(G) ; 
+    
+    for (int i = 0 ; i < grapheCourant->nbSommets ; i++) {
+        if (grapheCourant->nbAretes > 0) {    
+            for (int j = 0 ; j < grapheCourant->degreSommet[i] ; j++) {
+                
+                int *aRetirer = malloc(sizeof(int) * 2) ; 
+                aRetirer[0] = grapheCourant->tabSommets[i] ; 
+                aRetirer[1] = grapheCourant->tabAdjacence[i][j] ; 
+                
+                grapheCourant = retireEnsembleSommet(
+                    grapheCourant, 
+                    aRetirer, 
+                    2 ) ; 
+                    
+                
+                res.couverture[nbSommetsCouverture] = aRetirer[0] ; 
+                res.couverture[nbSommetsCouverture + 1] = aRetirer[1] ; 
+                nbSommetsCouverture += 2 ; 
+                i = 0 ; 
+                free(aRetirer) ; 
+                if (!grapheCourant) {
+                    res.couverture = raccourcitListe(res.couverture, res.cardinal, &res.cardinal) ; 
+                    return res ;                         
+                }
+                //afficheGraph(grapheCourant) ; 
+            }
+        }
+    }
+    freeGraph(grapheCourant) ; 
+    res.couverture = raccourcitListe(res.couverture, res.cardinal, &res.cardinal) ; 
+    return res ; 
+} 
 
-int *algoGlouton(Graph *G, int *tailleCouverture) {
+
+int *DONOTUSE_algoGlouton(Graph *G, int *tailleCouverture) {
     
     int *C = malloc(sizeof(int) * G->nbSommets) ; 
     int tailleSup = G->nbSommets ; 
@@ -347,6 +389,28 @@ int *algoGlouton(Graph *G, int *tailleCouverture) {
     }
     C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
     return C ; 
+}
+
+solution algoGlouton(Graph *G) {
+    solution res  ; 
+    res.couverture = malloc(sizeof(int) * G->nbSommets) ; 
+    res.cardinal = G->nbSommets ; 
+    int nbSommetsCouverture = 0 ; 
+    for (int i = 0 ; i < G->nbSommets ; i++) {
+        res.couverture[i] = -1 ; 
+    }
+    Graph *grapheCourant = copieGraph(G) ; 
+    while (grapheCourant && grapheCourant->nbAretes > 0) {
+        int indexSommetMaximal = indexSommetDegMax(grapheCourant) ; 
+        res.couverture[nbSommetsCouverture] = grapheCourant->tabSommets[indexSommetMaximal] ; 
+        grapheCourant = retireSommet(grapheCourant, grapheCourant->tabSommets[indexSommetMaximal]) ; 
+        nbSommetsCouverture += 1 ; 
+    }
+    if (grapheCourant) {
+        freeGraph(grapheCourant) ; 
+    }
+    res.couverture = raccourcitListe(res.couverture, res.cardinal, &res.cardinal) ;
+    return res ; 
 }
 
 int indexSommetDegMax (Graph *G) {

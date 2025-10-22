@@ -19,24 +19,19 @@ int main(int argc, char** argv) {
     DureeMax : 2.500, TailleMax : 2300
     DureeMax : 3.000, TailleMax : 2450
 
-    Si on laisse l'algorithme tourner plus longtemps, l'ordi plante donc on va éviter...
-    printf("Algorithme de couplage.") ; 
-    for (int i = 0 ; i < 7 ; i++) {
-        int tMax = tailleMaxGraphe (i/2.0, 0.5, 50, algoCouplage) ; 
-        printf("DureeMax : %.3f, TailleMax : %d\n", i/2.0, tMax) ; 
-        }
-        printf("Algorithme de couverture glouton.") ; 
-        for (int i = 0 ; i < 7 ; i++) {
-            int tMax = tailleMaxGraphe (i/2.0, 0.5, 50, algoGlouton) ; 
-            printf("DureeMax : %.3f, TailleMax : %d\n", i/2.0, tMax) ; 
-            }
-            */
-    
-    int nbPoints = 10 ; 
-    double *d = tempsMoyenAlgoCouplage(20, nbPoints, 0.2) ; 
-    for (int i = 0 ; i < nbPoints ; i++) {
-        printf("%d, %.3f\n", (i+1)*(MAXSOMMETS / nbPoints), d[i]) ; 
+    */
+
+    double tempsMax = 1.0 ; 
+    int nbIntervalles = 5 ; 
+    int pas = 50 ; 
+    double p = 0.4 ; 
+    printf("Test de tailleMax pour AlgoCouverture avec tempsMax = %f\n", tempsMax) ; 
+    for (int i = 0 ; i < nbIntervalles ; i++) {
+        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoCouplage)) ; 
     }
+    printf("======================\n") ; 
+    
+
 
 
     printf("Fin d'execution.\n") ; 

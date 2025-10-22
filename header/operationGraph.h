@@ -27,6 +27,15 @@ typedef struct couplage
     int cardinal;
 } Couplage;
 
+
+typedef struct solution{
+    int cardinal;
+    int *couverture;
+}solution;
+
+
+
+
 // Libère le graphe passé en paramètre 
 void freeGraph (Graph *G) ; 
 
@@ -76,3 +85,5 @@ int *uneArete(Graph *g);
 
 // Renvoie un couplage possible du graphe 
 Couplage couplage(Graph *g);
+
+solution voisins(Graph *g, int sommet);

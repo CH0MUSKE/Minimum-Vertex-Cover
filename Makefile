@@ -48,5 +48,8 @@ testTableau : $(OBJS) $(OBJ_DIR)/testTableau.o
 testPerformance : $(OBJS) $(OBJ_DIR)/testPerformance.o 
 	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^ -lm
 
+testBranchBound : $(OBJS) $(OBJ_DIR)/testBranchBound.o 
+	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^ -lm
+
 stu : 
 	echo $(OBJS)

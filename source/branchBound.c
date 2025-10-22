@@ -10,12 +10,13 @@ solution branchSimplInit (Graph *G) {
     return res ; 
 }
 
+
+/*
 solution branchSimplInit2 (Graph *G) {
     solution res = altBranchementSimple(G, NULL, 0) ; 
     return res ; 
 }
 
-/*
 
 solution branchementSimple(Graph *g, int *C, int n){
 
@@ -70,6 +71,7 @@ solution branchementSimple(Graph *g, int *C, int n){
     free(branche_u.couverture);
     return branche_v;
 }
+
 */
 
 solution branchementSimple(Graph *g, int *C, int n){

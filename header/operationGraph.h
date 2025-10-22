@@ -27,8 +27,6 @@ typedef struct couplage
     int cardinal;
 } Couplage;
 
-
-
 // Libère le graphe passé en paramètre 
 void freeGraph (Graph *G) ; 
 

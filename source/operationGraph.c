@@ -361,6 +361,8 @@ int indexSommetDegMax (Graph *G) {
     }
     return -1 ; 
 }
+/* 
+
 int map_indice_sommet(int nbSommets,int *tabSommets, int sommet){
     for(int i = 0; i < nbSommets; i++){
         if(tabSommets[i] == sommet){
@@ -611,5 +613,4 @@ int ecrireGraph(char *nom, Graph *g){
     close(fd);
     return r;
 }
-
-
+*/

@@ -17,7 +17,6 @@ typedef struct _graph {
 // On suppose que un graphe vide est représenté par NULL 
 
 
-
 typedef struct _couverture {
     int *listeSommets ; 
 } Couverture ; 

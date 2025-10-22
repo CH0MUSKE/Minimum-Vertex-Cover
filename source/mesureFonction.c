@@ -10,7 +10,7 @@ int tailleMaxGraphe (double tempsMax, float p, int pas, int* (*algo) (Graph*, in
     }
     int i = pas ; 
     int u ; 
-    while(temps < tempsMax && i < 10000 && tempsEcroule < 180) {
+    while(temps < tempsMax && i < 10000 && tempsEcroule < 60) {
         g = genereGraphAlea(i, p) ; 
         
         clock_t start = clock();
@@ -29,7 +29,7 @@ int tailleMaxGraphe (double tempsMax, float p, int pas, int* (*algo) (Graph*, in
     return i ; 
 }
 
-double *tempsMoyenNonGlouton (int nbGraphes, int nbPoints, double p) {
+double *tempsMoyenAlgoCouv (int nbGraphes, int nbPoints, double p) {
     double *res = malloc(sizeof(double) * nbPoints) ; 
     int nbSommets = (int) (MAXSOMMETS / nbPoints) ; 
     Graph *g ; 
@@ -44,7 +44,33 @@ double *tempsMoyenNonGlouton (int nbGraphes, int nbPoints, double p) {
             clock_t end = clock();
 
             res[i] += (float)(end - start) / (float) CLOCKS_PER_SEC;
+            free(t) ; 
             freeGraph(g) ; 
+        }
+        res[i] = res[i] / nbGraphes ; 
+        nbSommets += (MAXSOMMETS / nbPoints) ; 
+    }
+    return res ;     
+}
+
+double *tempsMoyenAlgoCouplage (int nbGraphes, int nbPoints, double p) {
+    double *res = malloc(sizeof(double) * nbPoints) ; 
+    int nbSommets = (int) (MAXSOMMETS / nbPoints) ; 
+    Graph *g ; 
+    int u ; 
+    for (int i = 0 ; i < nbPoints ; i++) {
+        res[i] = 0 ; 
+        for (int j = 0 ; j < nbGraphes ; j++) {
+            g = genereGraphAlea(nbSommets, p) ; 
+            
+            clock_t start = clock();
+            int *t = algoCouplage(g, &u) ;             
+            clock_t end = clock();
+
+            res[i] += (float)(end - start) / (float) CLOCKS_PER_SEC;
+            free(t) ; 
+            freeGraph(g) ; 
+            printf("%d\n", j) ; 
         }
         res[i] = res[i] / nbGraphes ; 
         nbSommets += (MAXSOMMETS / nbPoints) ; 

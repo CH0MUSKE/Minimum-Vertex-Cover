@@ -44,6 +44,9 @@ solution branchementSimple(Graph *g, int *C, int n){
     }
     free(branche_u.couverture);
     return branche_v;
+}
+// Branchement avec pile 
+solution *altBranchementSimple (Graph*g) {
     
 }
 
@@ -162,3 +165,68 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
     
 }
 
+Pile *empile (Pile *p, solution *s) {
+    Pile *tete = creeElPile(s) ; 
+    tete->suiv = p ; 
+    return tete ; 
+}
+
+Pile *depile (Pile *p, Pile **el) {
+    if (p) {
+        Pile *newTete = p->suiv ; 
+        *el = p ; 
+        return newTete ; 
+    }
+}
+
+void liberePile (Pile *p) {
+    if (p) {
+        Pile *suiv = p->suiv ;
+        libereElPile(p) ; 
+        liberePile(suiv) ;  
+    }
+}
+
+void libereElPile (Pile *p) {
+    if (p) {
+        free(p->s) ; 
+        free(p) ; 
+    }
+}
+
+Pile *creeElPile (solution *s) {
+    Pile *res = malloc(sizeof(Pile)) ; 
+    res->suiv = NULL ; 
+    res->s = copieSolution(s) ; 
+    return res ; 
+}
+
+solution *copieSolution(solution *s) {
+    if (s) {
+        solution *res = malloc(sizeof(solution)) ; 
+        res->cardinal = s->cardinal ; 
+        res->couverture = copieTab(s->couverture, s->cardinal) ; 
+        return res ; 
+    }
+    return NULL ; 
+}
+
+int valeurBorne (Graph *G, solution *couverture) {
+    int *m ; 
+    int *couplage = algoCouplage(G, m) ; 
+    int b1 = (int) m / (int) G->degreSommet[indexSommetDegMax(G)] ; 
+    int b2 = *m ; 
+    int b3 = (int) ((2*G->nbSommets - 1 - sqrt( (2*G->nbSommets - 1)*(2*G->nbSommets - 1) - (8 * *m)))) / 2 ; 
+    if(b1 >= b2 && b1 >= b3) {
+        return b1 ; 
+    }
+    if(b2 >= b1 && b2 >= b3) {
+        return b2 ; 
+    }
+    if(b3 >= b1 && b3 >= b2) {
+        return b3 ; 
+    }
+    else {
+        return -1 ; 
+    }
+}

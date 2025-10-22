@@ -45,7 +45,7 @@ testTableau : $(OBJS) $(OBJ_DIR)/testTableau.o
 	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
 
 testPerformance : $(OBJS) $(OBJ_DIR)/testPerformance.o 
-	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^
+	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^ -lm
 
 stu : 
 	echo $(OBJS)

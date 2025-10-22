@@ -220,18 +220,69 @@ Graph *retireEnsembleSommet (Graph *g, int *tab, int len) {
 int **listeAretes(Graph *g){
     int nbSommets = g ->nbSommets;
     int nbAretes = g -> nbAretes;
-    int **list = malloc(sizeof(int *) * nbAretes); 
+    int **list = malloc(sizeof(int *) * nbAretes);
+    int k = 0;
     for (int i = 0; i < nbSommets; i++){
-            list[i] = malloc(sizeof(int) * 2);
             for (int j = 0 ;j< g -> degreSommet[i]; j++){
                 if(g->tabSommets[i] < g->tabAdjacence[i][j]){
-                    list[i][0] = g ->tabSommets[i];
-                    list[i][j] = g -> tabAdjacence[i][j];
+                    list[k] = malloc(sizeof(int) * 2);
+                    list[k][0] = g ->tabSommets[i];
+                    list[k][1] = g -> tabAdjacence[i][j];
+                    k++;
                 }
             }
     }
     return list;
 }
+
+int *uneArete(Graph *g){
+    int nbSommets = g ->nbSommets;
+    int *arete = malloc(sizeof(int *) * 2);
+    for (int i = 0; i < nbSommets; i++){
+            for (int j = 0 ;j< g -> degreSommet[i]; j++){
+                if(g->tabSommets[i] < g->tabAdjacence[i][j]){
+                    arete[0] = g ->tabSommets[i];
+                    arete[1] = g -> tabAdjacence[i][j];
+                    return arete;
+                }
+            }
+    }
+    return NULL;
+}
+
+Couplage couplage(Graph *g) {
+    int **listAr = listeAretes(g); // liste d'arêtes [nbAretes][2]
+    Couplage c;
+    c.cardinal = 0;
+
+    // Allocation maximale possible
+    c.couplage = malloc(sizeof(int*) * g->nbAretes);
+    for(int i = 0; i < g->nbAretes; i++) {
+        c.couplage[i] = malloc(sizeof(int) * 2);
+        c.couplage[i][0] = -1;
+        c.couplage[i][1] = -1;
+    }
+
+    for(int i = 0; i < g->nbAretes; i++) {
+        int ajouter = 1;
+        for(int j = 0; j < c.cardinal; j++) {
+            if(c.couplage[j][0] == listAr[i][0] || c.couplage[j][0] == listAr[i][1] ||
+               c.couplage[j][1] == listAr[i][0] || c.couplage[j][1] == listAr[i][1]) {
+                ajouter = 0;
+                break;
+            }
+        }
+        if(ajouter) {
+            c.couplage[c.cardinal][0] = listAr[i][0];
+            c.couplage[c.cardinal][1] = listAr[i][1];
+            c.cardinal++;
+        }
+    }
+    
+
+    return c; // n'est pas forcément la taille exacte, mais tu peux renvoyer n séparément
+}
+
 
 
 int *algoCouplage(Graph *G, int *tailleCouverture) {
@@ -311,7 +362,7 @@ int indexSommetDegMax (Graph *G) {
     return -1 ; 
 }
 int map_indice_sommet(int nbSommets,int *tabSommets, int sommet){
-    for(size_t i = 0; i < nbSommets; i++){
+    for(int i = 0; i < nbSommets; i++){
         if(tabSommets[i] == sommet){
             return i;
         }
@@ -343,7 +394,6 @@ int **mat_adj_to_liste_adj(Graph *g){
         for(int j  = 0; j < g -> nbSommets; j++){
             if(tabAdjacence[i][j] == 1){
                 list_adj[i][k] = tabSommet[j];
-                printf("-%d %d-",list_adj[0][0], list_adj[0][1]);
                 k++;
             }
         }
@@ -387,7 +437,7 @@ int gestion_erreur_strtol(char *s){
     return n;
 }
 
-int gerer_ligne(unsigned int i, char *line, Graph *g){
+int gerer_ligne(int i, char *line, Graph *g){
     switch(i){
         case 0: return (strcmp(line,"Nombre de sommets") == 0);
         case 1: {
@@ -436,7 +486,7 @@ int gerer_ligne(unsigned int i, char *line, Graph *g){
             if(i == 5 + g -> nbAretes + g -> nbSommets){
                 if(ajout_degre_tous_sommets(g) == 1) return 0;
                 int **list_adj = mat_adj_to_liste_adj(g);
-                free_tab(g -> tabAdjacence, g -> nbSommets);
+                freeTab(g -> tabAdjacence, g -> nbSommets);
                 g -> tabAdjacence = list_adj;
             }
             break;
@@ -457,17 +507,16 @@ Graph *lireGraph(char *f){
         goto end;
     }
     char buf[520]; 
-    int r = 0;
     char *carry = NULL;
-    ssize_t n = 0;
+    int n = 0;
     Graph *g = malloc(sizeof(Graph));
-    unsigned int i = 0;
+    int i = 0;
 
     while((n = read(fd, buf, 1)) > 0){
         char *data;
         buf[n] = '\0';
         if(carry){
-            size_t len = strlen(carry);
+            int len = strlen(carry);
             data = malloc(sizeof(char) * (len + n + 1));
             memcpy(data,carry,len);
             memcpy(data + len, buf, n);

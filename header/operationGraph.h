@@ -16,14 +16,18 @@ typedef struct _graph {
 // Un graphe vide est un graphe n'ayant pas de sommets 
 // On suppose que un graphe vide est représenté par NULL 
 
-typedef struct solution{
-    int cardinal;
-    int *couverture;
-}solution;
+
 
 typedef struct _couverture {
     int *listeSommets ; 
 } Couverture ; 
+
+typedef struct couplage
+{
+    int **couplage;
+    int cardinal;
+} Couplage;
+
 
 
 // Libère le graphe passé en paramètre 
@@ -62,3 +66,8 @@ int ecrireGraph(char *nom, Graph *g) ;
 
 // Lit le graphe contenu dans le ficier passé en paramètre 
 Graph *lireGraph(char *f) ; 
+int **listeAretes(Graph *g);
+
+int *uneArete(Graph *g);
+
+Couplage couplage(Graph *g);

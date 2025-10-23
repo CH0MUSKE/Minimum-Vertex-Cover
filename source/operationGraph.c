@@ -612,4 +612,25 @@ int ecrireGraph(char *nom, Graph *g){
     return r;
 }
 
+solution voisins(Graph *g, int sommet){
+    int **listAr = listeAretes(g);
+    int *voisins = malloc(sizeof(int) * g -> nbSommets);
+    int k = 0;
+    for(int i = 0; i < g -> nbAretes; i++){
+        if(listAr[i][0] == sommet){
+            voisins[k] = listAr[i][1];
+            k++;
+        }
+        if(listAr[i][1] == sommet){
+            voisins[k] = listAr[i][0];
+            k++;
+        }
+    }
+    solution s;
+    s.cardinal = k;
+    s.couverture = voisins;
+    freeTab(listAr,g -> nbAretes);
+    return s;
+}
+
 

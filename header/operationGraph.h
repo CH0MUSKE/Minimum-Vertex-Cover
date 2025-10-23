@@ -16,6 +16,10 @@ typedef struct _graph {
 // Un graphe vide est un graphe n'ayant pas de sommets 
 // On suppose que un graphe vide est représenté par NULL 
 
+typedef struct solution{
+    int cardinal;
+    int *couverture;
+}solution;
 
 
 typedef struct _couverture {
@@ -71,3 +75,5 @@ int **listeAretes(Graph *g);
 int *uneArete(Graph *g);
 
 Couplage couplage(Graph *g);
+
+solution voisins(Graph *g, int sommet);

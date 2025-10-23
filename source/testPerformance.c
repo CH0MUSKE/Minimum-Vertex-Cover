@@ -19,25 +19,60 @@ int main(int argc, char** argv) {
     DureeMax : 2.500, TailleMax : 2300
     DureeMax : 3.000, TailleMax : 2450
 
-    Si on laisse l'algorithme tourner plus longtemps, l'ordi plante donc on va éviter...
-    printf("Algorithme de couplage.") ; 
-    for (int i = 0 ; i < 7 ; i++) {
-        int tMax = tailleMaxGraphe (i/2.0, 0.5, 50, algoCouplage) ; 
-        printf("DureeMax : %.3f, TailleMax : %d\n", i/2.0, tMax) ; 
-        }
-        printf("Algorithme de couverture glouton.") ; 
-        for (int i = 0 ; i < 7 ; i++) {
-            int tMax = tailleMaxGraphe (i/2.0, 0.5, 50, algoGlouton) ; 
-            printf("DureeMax : %.3f, TailleMax : %d\n", i/2.0, tMax) ; 
-            }
-            */
-    
-    int nbPoints = 10 ; 
-    double *d = tempsMoyenAlgoCouplage(20, nbPoints, 0.2) ; 
-    for (int i = 0 ; i < nbPoints ; i++) {
-        printf("%d, %.3f\n", (i+1)*(MAXSOMMETS / nbPoints), d[i]) ; 
+    */
+	/*
+	On considère que ces valeurs forment les paramètres par défaut de nos tests 
+	*/		
+	double tempsMax = 3 ; 
+	int nbIntervalles = 15 ; 
+	int pas = 25 ; 
+	double p = 0.3 ; 
+
+    if (argc == 5) {
+		argv ++ ; 
+		tempsMax = atof(*argv) ; 
+		argv ++ ; 
+		nbIntervalles = atoi(*argv) ; 
+		argv ++ ; 
+		pas = atoi(*argv) ; 
+		argv ++ ; 
+		p = atof(*argv) ; 
     }
 
+	printf("Parametres globaux : \ntempsMax = %.3f\nnbIntervales = %d\npas = %d\np = %.3f\n", tempsMax, nbIntervalles, pas, p) ; 
+
+	/*
+
+	printf("Test de tailleMax pour Branche\n") ; 
+	for (int i = 0 ; i < nbIntervalles ; i++) {
+		printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, F1)) ; 
+	}
+	printf("======================\n") ; 
+
+	printf("Test de tailleMax pour BrancheBoundV1\n") ; 
+	for (int i = 0 ; i < nbIntervalles ; i++) {
+		printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, F2)) ; 
+	}
+	printf("======================\n") ; 
+
+	printf("Test de tailleMax pour BrancheBoundV2\n") ; 
+	for (int i = 0 ; i < nbIntervalles ; i++) {
+		printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, F3)) ; 
+	}
+	printf("======================\n") ; 
+	
+	*/
+    printf("Test de tailleMax pour AlgoCouplage\n") ; 
+    for (int i = 0 ; i < nbIntervalles ; i++) {
+        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoCouplage)) ; 
+    }
+    printf("======================\n") ; 
+    
+	printf("Test de tailleMax pour AlgoGlouton\n") ; 
+    for (int i = 0 ; i < nbIntervalles ; i++) {
+        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoGlouton)) ; 
+    }
+    printf("======================\n") ; 
 
     printf("Fin d'execution.\n") ; 
     return 0 ; 

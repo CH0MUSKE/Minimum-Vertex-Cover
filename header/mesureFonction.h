@@ -8,10 +8,18 @@ Mesure le nombre maximum de sommets possibles dans un graphe généré aléatoir
 avec une proba de p pour les arêtes pour que le traitement 
 par la fonction algo soit complété dans un temps inférieur à tempsMax.
 Pour simplifier le calcul on fait cette mesure avec un pas donné, et 
-le temps total ne peut pas éxéder 180s 
+le temps total ne peut pas éxéder 60s 
 */
-int tailleMaxGraphe (double tempsMax, float p, int pas, int* (*algo) (Graph*, int*)) ; 
+int tailleMaxGraphe (double tempsMax, float p, int pas, solution (*algo) (Graph*)) ; 
 
 // Calcule les nbPoints de temps de l'algorithme non-glouton 
-double *tempsMoyenAlgoCouplage (int nbGraphes, int nbPoints, double p) ; 
-double *tempsMoyenAlgoCouv (int nbGraphes, int nbPoints, double p) ; 
+double *tempsMoyenAlgo(int nbGraphes, int nbPoints, double p, solution (*algo) (Graph*)) ; 
+
+/*
+Fonctions à tester : 
+- AlgoCouverture
+- AlgoGlouton 
+- Branchement sans bornes 
+- Branchement avec bornes simple
+- Branchement avec bornes améliorées
+*/

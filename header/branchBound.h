@@ -3,10 +3,25 @@
 #include <limits.h>
 #include <math.h>
 
- 
 
+/*
+Applique l'algorithme de branchement, sachant que C représente les sommets déjà 
+retirés du graphe et n la taille du tableau des sommets retirés
+*/ 
 solution branchementSimple(Graph *g, int *C, int n) ; 
+/*
+Applique l'algorithme de branchement avec borne, 
+sachant que C représente les sommets déjà retirés du graphe et 
+n la taille du tableau des sommets retirés
+*/
 solution branchementBorneCouplage(Graph *g, int *C, int n) ;
+solution altBranchementSimple(Graph *g, int *C, int n) ; 
+solution branchBorneCouplInit(Graph *g) ;
+solution branchSimplInit (Graph *G) ; 
+solution branchSimplInit2 (Graph *G) ; 
+
+
+
 typedef struct _pile {
     solution *s ; 
     struct _pile *suiv ; 
@@ -28,4 +43,4 @@ void libereElPile (Pile *p) ;
 
 solution branchementSimple(Graph *g, int *C, int n) ; 
 solution *copieSolution (solution *s) ; 
-int valeurBorne (Graph *G, solution *couverture) ; 
+

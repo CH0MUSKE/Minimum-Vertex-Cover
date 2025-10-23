@@ -1,0 +1,40 @@
+\documentclass{article}
+% \usepackage[utf8]{inputenc} is no longer required (since 2018)
+
+%Set the font (output) encoding
+%--------------------------------------
+\usepackage[T1]{fontenc} %Not needed by LuaLaTeX or XeLaTeX
+
+%French-specific commands
+%--------------------------------------
+\usepackage[french]{babel}
+\usepackage[autolanguage]{numprint} % for the \nombre command
+
+%Hyphenation rules
+%--------------------------------------
+\usepackage{hyphenat}
+\hyphenation{mate-mática recu-perar}
+%--------------------------------------
+
+\begin{document}
+\tableofcontents
+
+\vspace{2cm} %Add a 2cm space
+
+\begin{abstract}
+Ceci est un bref résumé du contenu du document écrit en français.
+\end{abstract}
+
+\section{Section d'introduction}
+Il s'agit de la première section, nous ajoutons des éléments supplémentaires et tout sera correctement orthographiés. En outre, si un mot est trop long et doit être tronqué, babel va essayer de tronquer correctement en fonction de la langue.
+
+\section{Section théorèmes}
+Cette section est de voir ce qui se passe avec les commandes de texte qui définissent.
+
+\begin{itemize}
+\item premier élément
+\item deuxième élément
+\end{itemize}
+
+\[ \lim x =  \theta + \nombre{152383.52} \]
+\end{document}

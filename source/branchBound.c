@@ -86,7 +86,6 @@ solution branchementSimple(Graph *g, int *C, int n){
             sol.couverture = C;
             return sol;
         }
-        // =========================A FINIIIIIIIIIIIIIIIIIIIIIIIIIIIIIR
     }
     else {
         sol.cardinal = n;
@@ -266,20 +265,15 @@ solution branchementBorneCouplageAmeliore(Graph *g, int *C, int n){
         s.couverture = NULL;
         return s;
     }
-    int x;
     Graph *h = copieGraph(g);
-    int *sol_realisable = algoCouplage(h,&x);
     freeGraph(h);
-    solution s;
-    s.cardinal = x;
-    s.couverture = sol_realisable;
+    solution s = algoCouplage(h) ;
     solution sol = concatene_sol(s,C,n);
     if(sol.cardinal < meilleure_solution.cardinal){
         if(meilleure_solution.couverture != NULL){
             free(meilleure_solution.couverture);
         }
         meilleure_solution = copy_sol(sol);
-        free(sol_realisable);
     }
 
     int *arete = uneArete(g);

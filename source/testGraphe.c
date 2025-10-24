@@ -2,21 +2,12 @@
 #include <stdio.h>
 
 int main(int argc, char** argv) {
-	/*
-	int taille = 6 ; 
-	int *tab = malloc(sizeof(int) * taille) ; 
-	for (int i = 0 ; i < taille - 1 ; i++)
-	{
-		tab[i] = i ; 
-		}
-		tab[taille - 1] = 9 ; 
-		afficheGraph(g) ; 
-		g = retireEnsembleSommet(g, tab, taille) ; 
-		
-	*/
+	Graph *g = genereGraphAlea(4, 0.1) ; 
+	afficheGraph(g) ; 
+	solution s = voisins(g, 1) ; 
+	afficheTab(s.couverture, s.cardinal) ; 
 
-	printf("Fin de fct") ; 
-	
+	printf("Fin de fct") ; 	
 	
     return 0 ; 
 }

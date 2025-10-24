@@ -425,3 +425,16 @@ int indexSommetDegMax (Graph *G) {
     }
     return -1 ; 
 }
+
+solution voisins(Graph *g, int sommet) {
+    solution res ; 
+    int i = calculeIndexValeur(g->tabSommets, g->nbAretes, sommet) ; 
+    if (i != -1) {
+        res.couverture = copieTab(g->tabAdjacence[i], g->degreSommet[i]) ; 
+        res.cardinal = g->degreSommet[i] ; 
+        return res ; 
+    }
+    res.couverture = NULL ; 
+    res.cardinal = 0 ; 
+    return res ; 
+}

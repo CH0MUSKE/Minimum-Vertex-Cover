@@ -6,23 +6,14 @@ int count = 0;
 int count2 = 0;
 
 solution branchSimplInit (Graph *G) {
-    solution res = branchementSimple(G, NULL, 0) ; 
-    return res ; 
+    return branchementSimple(G, NULL, 0) ;    
 }
-
-
-/*
-solution branchSimplInit2 (Graph *G) {
-    solution res = altBranchementSimple(G, NULL, 0) ; 
-    return res ; 
-}
-
 
 solution branchementSimple(Graph *g, int *C, int n){
 
     solution sol;
     // Si le graphe n'as pas d'arêtes, on arrête la récursion 
-    // car on a plus d'arête à couvrir
+    // car la couverture est consituées des sommets restants 
     if(g -> nbAretes == 0){
         sol.cardinal = n;
         sol.couverture = C;
@@ -72,16 +63,15 @@ solution branchementSimple(Graph *g, int *C, int n){
     return branche_v;
 }
 
-*/
+solution altBranchementSimple(Graph *g, int *C, int n){
 
-solution branchementSimple(Graph *g, int *C, int n){
     solution sol;
     // Si le graphe n'as pas d'arêtes, on arrête la récursion 
-    // car on a plus d'arête à couvrir
-    Graph *gCopy = copieGraph(g) ; 
-    gCopy = retireEnsembleSommet(gCopy, C, n) ; 
-    if (gCopy) {
-        if(gCopy->nbAretes == 0){
+    // car la couverture est consituées des sommets restants 
+    if (g) {
+        Graph *gCopy = copieGraph(g) ; 
+        gCopy = retireEnsembleSommet(gCopy, C, n) ; 
+        if(g -> nbAretes == 0){
             sol.cardinal = n;
             sol.couverture = C;
             return sol;
@@ -94,12 +84,10 @@ solution branchementSimple(Graph *g, int *C, int n){
     }
     
     // Sinon on prend une arête du graphe {u, v}
-    int *arete = uneArete(gCopy);
+    int *arete = uneArete(g);
     int u = arete[0];
     int v = arete[1];
-    
     free(arete);
-    freeGraph(gCopy) ; 
     
     // On met à jour la couverture des deux graphe ainsi crées 
     int *C_u = malloc(sizeof(int) * (n+1));
@@ -120,16 +108,13 @@ solution branchementSimple(Graph *g, int *C, int n){
     //  dans la couveture et V dans la couverture 
     solution branche_u = branchementSimple(g,C_u,n+1);
     solution branche_v = branchementSimple(g,C_v,n+1);
-    // Si la solution du sous-arbre gauche est meilleure que celle de droite, 
-    // on prend celle-ci, sinon l'autre 
-    if(branche_u.cardinal < branche_v.cardinal){
-        free(branche_v.couverture);
-        return branche_u;
-    }
-    free(branche_u.couverture);
-    return branche_v;
-}
+    
 
+}
+// Branchement avec pile 
+solution *altBranchementSimple (Graph*g) {
+    
+}
 
 int testElag(Graph *g, int cur_n){
     Couplage c = couplage(g);

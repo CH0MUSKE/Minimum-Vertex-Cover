@@ -28,6 +28,7 @@ typedef struct couplage
 } Couplage;
 
 
+
 // Libère le graphe passé en paramètre 
 void freeGraph (Graph *G) ; 
 

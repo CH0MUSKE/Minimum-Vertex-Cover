@@ -1,0 +1,4 @@
+\babel@toc {french}{}\relax 
+\babel@toc {french}{}\relax 
+\contentsline {section}{\numberline {1}Section d'introduction}{1}{}%
+\contentsline {section}{\numberline {2}Section théorèmes}{1}{}%

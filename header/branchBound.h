@@ -15,10 +15,9 @@ sachant que C représente les sommets déjà retirés du graphe et
 n la taille du tableau des sommets retirés
 */
 solution branchementBorneCouplage(Graph *g, int *C, int n) ;
-solution altBranchementSimple(Graph *g, int *C, int n) ; 
+
 solution branchBorneCouplInit(Graph *g) ;
 solution branchSimplInit (Graph *G) ; 
-solution branchSimplInit2 (Graph *G) ; 
 
 
 

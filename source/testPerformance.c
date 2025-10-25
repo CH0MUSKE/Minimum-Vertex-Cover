@@ -20,59 +20,19 @@ int main(int argc, char** argv) {
     DureeMax : 3.000, TailleMax : 2450
 
     */
-	/*
-	On considère que ces valeurs forment les paramètres par défaut de nos tests 
-	*/		
-	double tempsMax = 3 ; 
-	int nbIntervalles = 15 ; 
-	int pas = 25 ; 
-	double p = 0.3 ; 
 
-    if (argc == 5) {
-		argv ++ ; 
-		tempsMax = atof(*argv) ; 
-		argv ++ ; 
-		nbIntervalles = atoi(*argv) ; 
-		argv ++ ; 
-		pas = atoi(*argv) ; 
-		argv ++ ; 
-		p = atof(*argv) ; 
-    }
-
-	printf("Parametres globaux : \ntempsMax = %.3f\nnbIntervales = %d\npas = %d\np = %.3f\n", tempsMax, nbIntervalles, pas, p) ; 
-
-	/*
-
-	printf("Test de tailleMax pour Branche\n") ; 
-	for (int i = 0 ; i < nbIntervalles ; i++) {
-		printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, F1)) ; 
-	}
-	printf("======================\n") ; 
-
-	printf("Test de tailleMax pour BrancheBoundV1\n") ; 
-	for (int i = 0 ; i < nbIntervalles ; i++) {
-		printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, F2)) ; 
-	}
-	printf("======================\n") ; 
-
-	printf("Test de tailleMax pour BrancheBoundV2\n") ; 
-	for (int i = 0 ; i < nbIntervalles ; i++) {
-		printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, F3)) ; 
-	}
-	printf("======================\n") ; 
-	
-	*/
-    printf("Test de tailleMax pour AlgoCouplage\n") ; 
+    double tempsMax = 1.0 ; 
+    int nbIntervalles = 5 ; 
+    int pas = 50 ; 
+    double p = 0.4 ; 
+    printf("Test de tailleMax pour AlgoCouverture avec tempsMax = %f\n", tempsMax) ; 
     for (int i = 0 ; i < nbIntervalles ; i++) {
         printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoCouplage)) ; 
     }
     printf("======================\n") ; 
     
-	printf("Test de tailleMax pour AlgoGlouton\n") ; 
-    for (int i = 0 ; i < nbIntervalles ; i++) {
-        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoGlouton)) ; 
-    }
-    printf("======================\n") ; 
+
+
 
     printf("Fin d'execution.\n") ; 
     return 0 ; 

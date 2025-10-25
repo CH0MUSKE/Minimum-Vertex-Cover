@@ -6,23 +6,14 @@ int count = 0;
 int count2 = 0;
 
 solution branchSimplInit (Graph *G) {
-    solution res = branchementSimple(G, NULL, 0) ; 
-    return res ; 
+    return branchementSimple(G, NULL, 0) ;    
 }
-
-
-/*
-solution branchSimplInit2 (Graph *G) {
-    solution res = altBranchementSimple(G, NULL, 0) ; 
-    return res ; 
-}
-
 
 solution branchementSimple(Graph *g, int *C, int n){
 
     solution sol;
     // Si le graphe n'as pas d'arêtes, on arrête la récursion 
-    // car on a plus d'arête à couvrir
+    // car la couverture est consituées des sommets restants 
     if(g -> nbAretes == 0){
         sol.cardinal = n;
         sol.couverture = C;
@@ -72,35 +63,26 @@ solution branchementSimple(Graph *g, int *C, int n){
     return branche_v;
 }
 
-*/
+solution altBranchementSimple(Graph *g, int *C, int n){
 
-solution branchementSimple(Graph *g, int *C, int n){
     solution sol;
     // Si le graphe n'as pas d'arêtes, on arrête la récursion 
-    // car on a plus d'arête à couvrir
-    Graph *gCopy = copieGraph(g) ; 
-    gCopy = retireEnsembleSommet(gCopy, C, n) ; 
-    if (gCopy) {
-        if(gCopy->nbAretes == 0){
+    // car la couverture est consituées des sommets restants 
+    if (g) {
+        Graph *gCopy = copieGraph(g) ; 
+        gCopy = retireEnsembleSommet(gCopy, C, n) ; 
+        if(g -> nbAretes == 0){
             sol.cardinal = n;
             sol.couverture = C;
             return sol;
         }
         // =========================A FINIIIIIIIIIIIIIIIIIIIIIIIIIIIIIR
     }
-    else {
-        sol.cardinal = n;
-        sol.couverture = C;
-        return sol;
-    }
-    
     // Sinon on prend une arête du graphe {u, v}
-    int *arete = uneArete(gCopy);
+    int *arete = uneArete(g);
     int u = arete[0];
     int v = arete[1];
-    
     free(arete);
-    freeGraph(gCopy) ; 
     
     // On met à jour la couverture des deux graphe ainsi crées 
     int *C_u = malloc(sizeof(int) * (n+1));
@@ -121,16 +103,13 @@ solution branchementSimple(Graph *g, int *C, int n){
     //  dans la couveture et V dans la couverture 
     solution branche_u = branchementSimple(g,C_u,n+1);
     solution branche_v = branchementSimple(g,C_v,n+1);
-    // Si la solution du sous-arbre gauche est meilleure que celle de droite, 
-    // on prend celle-ci, sinon l'autre 
-    if(branche_u.cardinal < branche_v.cardinal){
-        free(branche_v.couverture);
-        return branche_u;
-    }
-    free(branche_u.couverture);
-    return branche_v;
-}
+    
 
+}
+// Branchement avec pile 
+solution *altBranchementSimple (Graph*g) {
+    
+}
 
 int testElag(Graph *g, int cur_n){
     Couplage c = couplage(g);
@@ -245,82 +224,6 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
     return branche_v;
     
 }
-
-solution branchementBorneCouplageAmeliore(Graph *g, int *C, int n){
-    printf("--%d--\n",count++);
-    if(g -> nbAretes == 0){
-        solution sol;
-        sol.cardinal = n;
-        sol.couverture = C;
-        if(n < meilleure_solution.cardinal){
-            if(meilleure_solution.couverture != NULL){
-                free(meilleure_solution.couverture);
-            }
-            meilleure_solution = copy_sol(sol);
-        }
-        return sol;
-    }
-    if(testElag(g,n)){
-        solution s;
-        s.cardinal = INT_MAX;
-        s.couverture = NULL;
-        return s;
-    }
-    int x;
-    Graph *h = copieGraph(g);
-    int *sol_realisable = algoCouplage(h,&x);
-    freeGraph(h);
-    solution s;
-    s.cardinal = x;
-    s.couverture = sol_realisable;
-    solution sol = concatene_sol(s,C,n);
-    if(sol.cardinal < meilleure_solution.cardinal){
-        if(meilleure_solution.couverture != NULL){
-            free(meilleure_solution.couverture);
-        }
-        meilleure_solution = copy_sol(sol);
-        free(sol_realisable);
-    }
-
-    int *arete = uneArete(g);
-    int u = arete[0];
-    int v = arete[1];
-    free(arete);
-    Graph *gcpy1 = copieGraph(g);
-    Graph *gcpy5 = copieGraph(g);
-    Graph *g_sans_u = retireSommet(gcpy1,u);
-    Graph *g_sans_v = retireSommet(gcpy5,v);
-    Graph *gcpy4 = copieGraph(g_sans_u);
-    Graph *g_sans_v_u = retireSommet(gcpy4,v);
-    solution voisins_u = voisins(g_sans_v,u);
-    Graph *gcpy2 = copieGraph(g_sans_v_u);
-    Graph *g_sans_v_u_voisins_u = retireEnsembleSommet(gcpy2,voisins_u.couverture,voisins_u.cardinal);
-    int *C_u = malloc(sizeof(int) * (n+1));
-    int *C_v = malloc(sizeof(int) * (n+1 + voisins_u.cardinal));
-    if(C != NULL){
-        memcpy(C_u,C,sizeof(int) * n);
-        memcpy(C_v,C,sizeof(int) * n);
-    }
-    C_u[n] = u;
-    C_v[n] = v;
-    memcpy(C_v + n + 1, voisins_u.couverture,sizeof(int)*voisins_u.cardinal);
-    if(C != NULL){
-        free(C);
-    }
-    solution branche_u = branchementBorneCouplageAmeliore(g_sans_u,C_u,n+1);
-    solution branche_v = branchementBorneCouplageAmeliore(g_sans_v_u_voisins_u,C_v, n+1 + voisins_u.cardinal);
-
-    freeGraph(g_sans_v_u_voisins_u);
-
-    if(branche_u.cardinal < branche_v.cardinal){
-        free(branche_v.couverture);
-        return branche_u;
-    }
-    free(branche_u.couverture);
-    return branche_v;
-    
-}
-
 
 Pile *empile (Pile *p, solution *s) {
     Pile *tete = creeElPile(s) ; 

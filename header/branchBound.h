@@ -40,6 +40,5 @@ void liberePile (Pile *p) ;
 
 void libereElPile (Pile *p) ; 
 
-solution branchementSimple(Graph *g, int *C, int n) ; 
 solution *copieSolution (solution *s) ; 
 

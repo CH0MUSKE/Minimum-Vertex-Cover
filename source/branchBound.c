@@ -14,81 +14,23 @@ solution branchementSimple(Graph *g, int *C, int n){
     solution sol;
     // Si le graphe n'as pas d'arêtes, on arrête la récursion 
     // car la couverture est consituées des sommets restants 
-    if(g -> nbAretes == 0){
-        sol.cardinal = n;
-        sol.couverture = C;
-        return sol;
-    }
-    // Sinon on prend une arête du graphe {u, v}
-    int *arete = uneArete(g);
-    int u = arete[0];
-    int v = arete[1];
-    free(arete);
-    Graph *gcpy1 = copieGraph(g);
-    Graph *gcpy2 = copieGraph(g);
+    Graph *gCopy = copieGraph(g) ; 
+    gCopy = retireEnsembleSommet(gCopy, C, n) ; 
     
-    // On retire u (resp v) de g pour les ajouter aux couvertures 
-    Graph *g_sans_u = retireSommet(gcpy1,u);
-    Graph *g_sans_v = retireSommet(gcpy2,v);
-
-    // On met à jour la couverture des deux graphe ainsi crées 
-    int *C_u = malloc(sizeof(int) * (n+1));
-    int *C_v = malloc(sizeof(int) * (n+1));
-    if(C != NULL){
-        // Copie de la couverture du noeud père dans les noeuds fils 
-        memcpy(C_u,C,sizeof(int) * n);
-        memcpy(C_v,C,sizeof(int) * n);
-    }
-    // On ajoute u (resp v) aux tableaux 
-    C_u[n] = u;
-    C_v[n] = v;
-    // On détruit la liste précédente si nécessaire 
-    if(C != NULL){
-        free(C);
-    }
-    // On calcule les couvrement optimaux sachant U 
-    //  dans la couveture et V dans la couverture 
-    solution branche_u = branchementSimple(g_sans_u,C_u,n+1);
-    solution branche_v = branchementSimple(g_sans_v,C_v,n+1);
-
-    freeGraph(g_sans_u);
-    freeGraph(g_sans_v);
-    // Si la solution du sous-arbre gauche est meilleure que celle de droite, 
-    // on prend celle-ci, sinon l'autre 
-    if(branche_u.cardinal < branche_v.cardinal){
-        free(branche_v.couverture);
-        return branche_u;
-    }
-    free(branche_u.couverture);
-    return branche_v;
-}
-
-solution altBranchementSimple(Graph *g, int *C, int n){
-
-    solution sol;
-    // Si le graphe n'as pas d'arêtes, on arrête la récursion 
-    // car la couverture est consituées des sommets restants 
-    if (g) {
-        Graph *gCopy = copieGraph(g) ; 
-        gCopy = retireEnsembleSommet(gCopy, C, n) ; 
-        if(g -> nbAretes == 0){
-            sol.cardinal = n;
-            sol.couverture = C;
-            return sol;
-        }
-    }
-    else {
+    if(gCopy -> nbAretes == 0){
         sol.cardinal = n;
         sol.couverture = C;
         return sol;
     }
     
+    
+    
     // Sinon on prend une arête du graphe {u, v}
-    int *arete = uneArete(g);
+    int *arete = uneArete(gCopy);
     int u = arete[0];
     int v = arete[1];
     free(arete);
-    
+    freeGraph(gCopy) ; 
     // On met à jour la couverture des deux graphe ainsi crées 
     int *C_u = malloc(sizeof(int) * (n+1));
     int *C_v = malloc(sizeof(int) * (n+1));
@@ -108,12 +50,13 @@ solution altBranchementSimple(Graph *g, int *C, int n){
     //  dans la couveture et V dans la couverture 
     solution branche_u = branchementSimple(g,C_u,n+1);
     solution branche_v = branchementSimple(g,C_v,n+1);
-    
+    if(branche_u.cardinal < branche_v.cardinal){
+        free(branche_v.couverture);
+        return branche_u;
+    }
+    free(branche_u.couverture);
+    return branche_v;
 
-}
-// Branchement avec pile 
-solution *altBranchementSimple (Graph*g) {
-    
 }
 
 int testElag(Graph *g, int cur_n){

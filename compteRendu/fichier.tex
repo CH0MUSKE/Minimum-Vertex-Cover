@@ -1,0 +1,97 @@
+\documentclass{article}
+% \usepackage[utf8]{inputenc} is no longer required (since 2018)
+
+%Set the font (output) encoding
+%--------------------------------------
+\usepackage[T1]{fontenc} %Not needed by LuaLaTeX or XeLaTeX
+
+%French-specific commands
+%--------------------------------------
+\usepackage[french]{babel}
+\usepackage[autolanguage]{numprint} % for the \nombre command
+
+%Hyphenation rules
+%--------------------------------------
+\usepackage{hyphenat}
+\hyphenation{mate-mática recu-perar}
+%--------------------------------------
+
+% La première ligne charge le paquet, et la deuxième 
+% ligne fixe la marge horizontale à 2,5 cm, et la marge verticale à 1,5 cm.
+%--------------------------------------
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=1.5cm}
+%--------------------------------------
+% Pour inclure les images
+\usepackage{graphicx}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+\tableofcontents
+
+\vspace{1cm} %Add a 2cm space
+\hspace{2cm}
+
+\begin{abstract}
+Ceci est un bref résumé du contenu du document écrit en français.
+\end{abstract}
+
+\section{Section d'introduction}
+Il s'agit de la première section, nous ajoutons des éléments supplémentaires et tout sera correctement orthographiés. 
+En outre, si un mot est trop long et doit être tronqué, babel va essayer de tronquer correctement en fonction de la langue.
+
+\section{Réponses aux questions}
+
+\subsection{Exercice 3}
+
+1. \\
+Posont le graphe G = (V, E) avec V = $V_0 \cup V_1 \cup V_2$ avec :
+\begin{itemize}
+    \item $V_0 = \{s_0\}$
+    \item $V_1 = \{s_1, s_2, s_3, s_4, s_5, s_6\}$
+    \item $V_2 = \{s_7, s_8, s_9, s_{10}, s_{11}, s_{12}, s_{13}, s_{14}\}$
+\end{itemize}
+Et E = $E_0 \cup E_1 \cup E_2$ avec : 
+\begin{itemize}
+    \item $E_0 = \{\{s_0, s_i\} \text{  } \forall i \in \{1, \dots, 6\} \}$
+    \item $E_1 = \{\{s_i, s_j\} \text{  } \forall i \in \{1, \dots, 6\}, \forall j \in \{7, \dots, 14\}\}$
+    \item $E_2 = \{\{s_i, s_{i+1}\} \text{  } \forall i \in \{7, \dots, 13\}\}$
+\end{itemize} 
+
+On peut remarquer que dans ce graphe : 
+\begin{equation*}
+    \begin{cases}
+        deg(s_0) = 6 \\
+        deg(s) = 9 & \text{si } s \in V_1 \\
+        deg(s) < 9 & \text{si } s \in V_2
+    \end{cases}
+\end{equation*}
+L'algorithme glouton va donc prendre tout les sommets de $V_1$ puisque ils sont tous de
+degré maximal, puis les sommets $s_8, s_{10}, s_{12}, s_{13}$. Ceci nous donne donc 
+une couverture de taille 10. Or une autre solution de taille inférieure serait de ne que prendre 
+les sommets de $V_2$, puis $s_0$, ce qui donne une couverture de taille 9. Donc l'algorithme 
+glouton n'est pas optimal, et n'est pas 1-approché.
+
+2. 
+
+3. Réduction de Stable de taille au moins n - kn à Couverture de taille plus k ? 
+
+\subsection{Exercice 4}
+
+\subsubsection*{Partie 1}
+
+\subsubsection*{Partie 2}
+1. $b_3$ : on peut identifier le polynôme $x^2 + x + 2m = 2nx$, l'inégalité nous donne que : $2m \le |C| (2n - |C| - 1)$. 
+
+
+
+\subsubsection*{Partie 3}
+
+3.
+
+\subsubsection*{Partie 4}
+
+\[ \lim x =  \theta + \nombre{152383.52} \]
+\end{document}

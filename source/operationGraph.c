@@ -237,7 +237,7 @@ int **listeAretes(Graph *g){
 
 int *uneArete(Graph *g){
     int nbSommets = g ->nbSommets;
-    int *arete = malloc(sizeof(int *) * 2);
+    int *arete = malloc(sizeof(int) * 2);
     for (int i = 0; i < nbSommets; i++){
             for (int j = 0 ;j< g -> degreSommet[i]; j++){
                 if(g->tabSommets[i] < g->tabAdjacence[i][j]){
@@ -279,18 +279,21 @@ Couplage couplage(Graph *g) {
         }
     }
     
+    for (int i = 0 ; i < g->nbAretes ; i++) {
+        free(listAr[i]) ; 
+    }
+    free(listAr) ; 
 
     return c; // n'est pas forcément la taille exacte, mais tu peux renvoyer n séparément
 }
 
-
-
-int *algoCouplage(Graph *G, int *tailleCouverture) {
-    int *C = malloc(sizeof(int) * G->nbSommets) ; 
-    int tailleSup = G->nbSommets ; 
+solution algoCouplage(Graph *G) {
+    solution res ; 
+    res.couverture = malloc(sizeof(int) * G->nbSommets) ; 
+    res.cardinal = G->nbSommets ; 
     int nbSommetsCouverture = 0 ; 
     for (int i = 0 ; i < G->nbSommets ; i++) {
-        C[i] = -1 ; 
+        res.couverture[i] = -1 ; 
     }
     Graph *grapheCourant = copieGraph(G) ; 
     
@@ -308,45 +311,45 @@ int *algoCouplage(Graph *G, int *tailleCouverture) {
                     2 ) ; 
                     
                 
-                C[nbSommetsCouverture] = aRetirer[0] ; 
-                C[nbSommetsCouverture + 1] = aRetirer[1] ; 
+                res.couverture[nbSommetsCouverture] = aRetirer[0] ; 
+                res.couverture[nbSommetsCouverture + 1] = aRetirer[1] ; 
                 nbSommetsCouverture += 2 ; 
                 i = 0 ; 
                 free(aRetirer) ; 
                 if (!grapheCourant) {
-                    C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
-                    return C ;                         
+                    res.couverture = raccourcitListe(res.couverture, res.cardinal, &res.cardinal) ; 
+                    return res ;                         
                 }
                 //afficheGraph(grapheCourant) ; 
             }
         }
     }
     freeGraph(grapheCourant) ; 
-    C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
-    return C ; 
+    res.couverture = raccourcitListe(res.couverture, res.cardinal, &res.cardinal) ; 
+    return res ; 
 } 
 
 
-int *algoGlouton(Graph *G, int *tailleCouverture) {
-    
-    int *C = malloc(sizeof(int) * G->nbSommets) ; 
-    int tailleSup = G->nbSommets ; 
+solution algoGlouton(Graph *G) {
+    solution res  ; 
+    res.couverture = malloc(sizeof(int) * G->nbSommets) ; 
+    res.cardinal = G->nbSommets ; 
     int nbSommetsCouverture = 0 ; 
     for (int i = 0 ; i < G->nbSommets ; i++) {
-        C[i] = -1 ; 
+        res.couverture[i] = -1 ; 
     }
     Graph *grapheCourant = copieGraph(G) ; 
     while (grapheCourant && grapheCourant->nbAretes > 0) {
         int indexSommetMaximal = indexSommetDegMax(grapheCourant) ; 
-        C[nbSommetsCouverture] = grapheCourant->tabSommets[indexSommetMaximal] ; 
+        res.couverture[nbSommetsCouverture] = grapheCourant->tabSommets[indexSommetMaximal] ; 
         grapheCourant = retireSommet(grapheCourant, grapheCourant->tabSommets[indexSommetMaximal]) ; 
         nbSommetsCouverture += 1 ; 
     }
     if (grapheCourant) {
         freeGraph(grapheCourant) ; 
     }
-    C = raccourcitListe(C, tailleSup, tailleCouverture) ; 
-    return C ; 
+    res.couverture = raccourcitListe(res.couverture, res.cardinal, &res.cardinal) ;
+    return res ; 
 }
 
 int indexSommetDegMax (Graph *G) {
@@ -361,6 +364,8 @@ int indexSommetDegMax (Graph *G) {
     }
     return -1 ; 
 }
+/* 
+
 int map_indice_sommet(int nbSommets,int *tabSommets, int sommet){
     for(int i = 0; i < nbSommets; i++){
         if(tabSommets[i] == sommet){
@@ -611,26 +616,17 @@ int ecrireGraph(char *nom, Graph *g){
     close(fd);
     return r;
 }
+*/
 
-solution voisins(Graph *g, int sommet){
-    int **listAr = listeAretes(g);
-    int *voisins = malloc(sizeof(int) * g -> nbSommets);
-    int k = 0;
-    for(int i = 0; i < g -> nbAretes; i++){
-        if(listAr[i][0] == sommet){
-            voisins[k] = listAr[i][1];
-            k++;
-        }
-        if(listAr[i][1] == sommet){
-            voisins[k] = listAr[i][0];
-            k++;
-        }
+solution voisins(Graph *g, int sommet) {
+    solution res ; 
+    int i = calculeIndexValeur(g->tabSommets, g->nbAretes, sommet) ; 
+    if (i != -1) {
+        res.couverture = copieTab(g->tabAdjacence[i], g->degreSommet[i]) ; 
+        res.cardinal = g->degreSommet[i] ; 
+        return res ; 
     }
-    solution s;
-    s.cardinal = k;
-    s.couverture = voisins;
-    freeTab(listAr,g -> nbAretes);
-    return s;
+    res.couverture = NULL ; 
+    res.cardinal = 0 ; 
+    return res ; 
 }
-
-

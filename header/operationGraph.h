@@ -21,11 +21,6 @@ typedef struct solution{
     int *couverture;
 }solution;
 
-
-typedef struct _couverture {
-    int *listeSommets ; 
-} Couverture ; 
-
 typedef struct couplage
 {
     int **couplage;
@@ -56,10 +51,15 @@ Graph *retireSommet (Graph *G, int v) ;
 Graph *retireEnsembleSommet (Graph *g, int *tab, int len) ; 
 
 // Calcule une couverture de G
-int *algoCouplage(Graph *G, int *tailleCouverture) ; 
+int *DONOTUSE_algoCouplage(Graph *G, int *tailleCouverture) ; 
+
+solution algoCouplage(Graph *G) ; 
 
 // Calcule une couverture de G, avec un algorithme glouton 
-int *algoGlouton(Graph *G, int *tailleCouverture) ; 
+int *DONOTUSE_algoGlouton(Graph *G, int *tailleCouverture) ; 
+
+
+solution algoGlouton(Graph *G) ; 
 
 // Retourne le sommet de degré maximum de G 
 int indexSommetDegMax (Graph *G) ; 
@@ -67,13 +67,17 @@ int indexSommetDegMax (Graph *G) ;
 // Ecrit le graphe passé en paramètre dans un fichier texte 
 int ecrireGraph(char *nom, Graph *g) ; 
 
-
-// Lit le graphe contenu dans le ficier passé en paramètre 
+// Lit le graphe contenu dans le fichier passé en paramètre 
 Graph *lireGraph(char *f) ; 
+
+// Renvoie une liste des arêtes du graphe passé en paramètre 
 int **listeAretes(Graph *g);
 
+// Donne une arête du graphe 
 int *uneArete(Graph *g);
 
+// Renvoie un couplage possible du graphe 
 Couplage couplage(Graph *g);
 
+// Retourne l'ensemble des voisins de sommet 
 solution voisins(Graph *g, int sommet);

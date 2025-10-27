@@ -3,30 +3,55 @@
 int main(int argc, char** argv) {
 
     /*
-    Nombre maximum de sommets par type d'algorithme 
-    Pour algorithme non-glouton, avec un pas de 25 :
-    1 sec, p = 0.8 => 1250
-    1 sec, p = 0.6 => 1425
-    1 sec, p = 0.4 => 1750
-    1 sec, p = 0.2 => 2325
-
-    Pour algorithme glouton, avec un pas de 25 : 
-    1 sec, p = 0.8 => 1250
-    1 sec, p = 0.6 => 1350
-    1 sec, p = 0.4 => 1725
-    1 sec, p = 0.2 => 2325
-
-    Sachant algoNonGlouton, pas de 50 : 
-    DureeMax : 0.000, TailleMax : 50
-    DureeMax : 0.500, TailleMax : 1300
+    Algo couverture 
+    DureeMax : 0.500, TailleMax : 1250
     DureeMax : 1.000, TailleMax : 1600
-    DureeMax : 1.500, TailleMax : 1550
+    DureeMax : 1.500, TailleMax : 1850
+    DureeMax : 2.000, TailleMax : 2000
+    DureeMax : 2.500, TailleMax : 2200
+    DureeMax : 3.000, TailleMax : 2300
 
-    Si on laisse l'algorithme tourner plus longtemps, l'ordi plante donc on va éviter...
-    int nbPoints = 5 ; 
-    double *d = tempsMoyenNonGlouton(10, nbPoints, 1.0) ; 
-    for (int i = 0 ; i < nbPoints ; i++) {
-        printf("%d, %.3f\n", i*(MAXSOMMETS / nbPoints), d[i]) ; 
+    Algo glouton 
+    DureeMax : 0.500, TailleMax : 1350
+    DureeMax : 1.000, TailleMax : 1700
+    DureeMax : 1.500, TailleMax : 1950
+    DureeMax : 2.000, TailleMax : 2150
+    DureeMax : 2.500, TailleMax : 2300
+    DureeMax : 3.000, TailleMax : 2450
+
+    */
+
+    double tempsMax = 2.0 ; 
+    int nbIntervalles = 10 ; 
+    int pas = 50 ; 
+    double p = 0.2 ; 
+    FILE *f = fopen("data.txt", "w") ; 
+
+	if (argc == 5) {
+		tempsMax = atof(argv[1]) ; 
+		if (atoi(argv[2]) < 0) {
+			nbIntervalles = atoi(argv[2]) ; 
+		}
+		if (atoi(argv[3]) < 0) {
+			pas = atoi(argv[3]) ; 
+		}
+		if (atof(argv[4]) <= 0.0 && atof(argv[4]) <= 1.0) {
+            p = atof(argv[4]) ; 
+		}
+	}
+	
+    for (int i = 1 ; i < 100 ; i++) {
+
+        Graph *g = genereGraphAlea(i*pas, p) ; 
+    
+        clock_t start = clock();
+        solution t = branchementBorneCouplageInit(g) ; 
+        clock_t end = clock();
+    
+        free(t.couverture) ;  
+        double temps = (float)(end - start) / (float) CLOCKS_PER_SEC;
+        if (temps > tempsMax) {
+            break;
         }
         */
     /*for (int i = 0 ; i < 4 ; i++) {

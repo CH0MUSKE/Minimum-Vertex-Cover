@@ -11,3 +11,5 @@ lSommets = tableau de nombres représentant les sommets
 lAdjacence = tableau contenant les liste d'adjacence associé 
 à chaque 
 
+Attention, conserver les versions précédentes des algorithmes, et créer des 
+éxécutables pour chaque version demandée 

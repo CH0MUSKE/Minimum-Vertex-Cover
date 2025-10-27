@@ -1,46 +1,98 @@
 #include "./header/operationGraph.h"
 #include <stdio.h>
+#define MAXBUFF 1000
+
+Graph *altLireGraph(FILE *f) {
+
+	char buff [MAXBUFF] ;  
+    int x ; 
+	
+	// Nombre de sommets 
+	if (fgets(buff, MAXBUFF, f) == NULL) {
+		printf("Erreur=\n") ; 
+	}
+	
+	// valeur 
+	fgets(buff, MAXBUFF, f) ; 
+	if (sscanf(buff, "%d\n", &x) != 1) {
+		printf("Erreur\n") ; 
+	}
+	
+	// Sommets 
+	fgets(buff, MAXBUFF, f) ; 
+	Graph *res = creeGraph(x) ; 
+	res->tabSommets = malloc(sizeof(int) * x) ; 
+	res->degreSommet = malloc(sizeof(int) * x) ; 
+	for (int i = 0 ; i < res->nbSommets ; i++) {
+		// valeur
+		fgets(buff, MAXBUFF, f) ; 
+		sscanf(buff, "%d\n", &x) ; 
+		res->tabSommets[i] = x ; 
+		res->degreSommet[i] = res->nbSommets - 1 ; 
+	}
+	
+	// Nombre d'aretes 
+	fgets(buff, MAXBUFF, f) ; 
+	
+	// valeur 
+	fgets(buff, MAXBUFF, f) ; 
+	sscanf(buff, "%d\n", &x) ; 
+	
+	res->nbAretes = x ; 
+	res->tabAdjacence = malloc(sizeof(int*) * res->nbSommets) ; 
+	
+	fgets(buff, MAXBUFF, f) ; 
+	
+	
+	for (int i = 0 ; i < res->nbSommets ; i++) {
+		res->tabAdjacence[i] = malloc(sizeof(int) * (res->nbSommets - 1)) ; 
+		for (int j = 0 ; j < res->nbSommets - 1 ; j++) {
+			res->tabAdjacence[i][j] = -1 ; 
+		}
+	}
+
+	
+	// Tableau des longeurs courantes des listes d'adjacence 
+	int *currentLens = malloc(sizeof(int) * res->nbSommets) ; 
+	for (int i = 0 ; i < res->nbSommets ; i++) {
+		currentLens[i] = 0 ; 
+	}
+
+	int y ; 
+	for (int i = 0 ; i < res->nbAretes ; i++) {
+		fgets(buff, MAXBUFF, f) ; 
+		sscanf(buff, "%d %d\n", &x, &y) ; 
+		res->tabAdjacence[x][currentLens[x]] = y ;
+		currentLens[x] += 1 ; 
+		res->tabAdjacence[y][currentLens[y]] = x ; 
+		currentLens[y] += 1 ; 
+	}
+	printf("") ; 
+	for (int i = 0 ; i < res->nbSommets ; i++) {
+		res->tabAdjacence[i] = raccourcitListe(res->tabAdjacence[i], res->degreSommet[i] - 1, &x) ; 
+		res->degreSommet[i] = x ; 
+	}
+
+    return res ; 
+}
+
 
 int main(int argc, char** argv) {
 	/*
-	int taille = 6 ; 
-	int *tab = malloc(sizeof(int) * taille) ; 
-	for (int i = 0 ; i < taille - 1 ; i++)
-	{
-		tab[i] = i ; 
-		}
-		tab[taille - 1] = 9 ; 
-		afficheGraph(g) ; 
-		g = retireEnsembleSommet(g, tab, taille) ; 
-		
-	*/
-	for (int i = 0; i <200 ; i++){
-		Graph *g = genereGraphAlea(1000, (float) 0.25) ; 
-		Graph *gp = copieGraph(g) ; 
-		int taille1, taille2 ; 
-		printf("===================== %d\n", i) ; 
-		if (i == 11) {
-			//afficheGraph(g) ; 
-		}
-		int *tab1 = algoCouplage(g, &taille1) ; 
-		printf("HI====\n") ; 
-		int *tab2 = algoGlouton(gp, &taille2) ; 
-		/*
-		afficheGraph(g) ; 
-		printf("Résultats :\n Non-glouton :\n") ; 
-		afficheTab(tab1, taille1) ; 
-		printf("Glouton : \n") ; 
-		afficheTab(tab2, taille2) ; 
-		*/
-
-		freeGraph(g) ; 
-		freeGraph(gp) ; 
-		free(tab1) ; 
-		free(tab2) ; 
-		
-	/* code */
+	FILE *f = fopen("exempleinstance.txt", "r") ; 
+	if (f == NULL) {
+		printf("TTK\n") ; 
 	}
-	printf("Fin de fct") ; 
+	Graph *g = altLireGraph(f) ; 
+	afficheGraph(g) ; 
+
+	solution s = algoGlouton(g) ; 
+	afficheTab(s.couverture, s.cardinal) ; 
+	*/
+
+	
+
+	printf("Fin de fct") ; 	
 	
     return 0 ; 
 }

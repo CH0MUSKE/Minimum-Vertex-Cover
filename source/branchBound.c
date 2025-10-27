@@ -109,7 +109,7 @@ solution branchementBorneCouplageInit(Graph *g) {
 }
 
 solution branchementBorneCouplage(Graph *g, int *C, int n){
-    //printf("--%d--\n",count++);
+    printf("--%d--\n",count++);
     if(g -> nbAretes == 0){
         solution sol;
         sol.cardinal = n;

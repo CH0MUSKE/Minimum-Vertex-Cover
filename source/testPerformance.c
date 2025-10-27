@@ -53,41 +53,22 @@ int main(int argc, char** argv) {
         if (temps > tempsMax) {
             break;
         }
-        printf("%.4f, %d\n", temps, i) ; 
-    }
-    
-    
-	/*
+        */
+    /*for (int i = 0 ; i < 4 ; i++) {
+        int tMax = tailleMaxGraphe (((double) i)/2.0, 0.5, 50, algoCouplage) ; 
+        printf("DureeMax : %.3f, TailleMax : %d\n", ((double) i)/2.0, tMax) ; 
+    }*/
+    Graph *g = genereGraphAlea(25,0.2);
 
-    printf("Test de tailleMax pour algoCouverture avec tempsMax = %f\n", tempsMax) ; 
-    for (int i = 0 ; i < nbIntervalles ; i++) {
-        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 
-        tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoCouplage)) ; 
-    }
-    printf("Test de tailleMax pour algoGlouton avec tempsMax = %f\n", tempsMax) ; 
-    for (int i = 0 ; i < nbIntervalles ; i++) {
-        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 
-        tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoGlouton)) ; 
-    }
+    solution s = branchementBorneCouplage(g, NULL, 0);
 
-    
-    
-    printf("Test de tailleMax pour branchementBorneCouplageAmelioreInit avec tempsMax = %f\n", tempsMax) ; 
-    for (int i = 0 ; i < nbIntervalles ; i++) {
-        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 
-        tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, branchementBorneCouplageAmelioreInit)) ; 
-    }
-	*/
+    solution so = branchementBorneCouplageAmeliore(g, NULL, 0);
 
-    /* 
-    double *d = tempsMoyenAlgo(10, 3, 0.4, 20, branchementSimpleInit) ; 
-    ecrireTempsMoyen(d, 3, 20, f) ; 
-    printf("======================\n") ; 
-    d = tempsMoyenAlgo(10, 5, 0.4, 100, branchementBorneCouplageInit) ; 
-    ecrireTempsMoyen(d, 5, 100, f) ; 
-    */
+    solution sol = branchementSimple(g,NULL,0);
 
 
-    printf("Fin d'execution.\n") ; 
-    return 0 ; 
+    printf("%d %d %d\n", s.cardinal, so.cardinal, sol.cardinal);
+
+    freeGraph(g);
+    return 0;
 }

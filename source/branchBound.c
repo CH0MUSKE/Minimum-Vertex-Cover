@@ -5,7 +5,7 @@ solution meilleure_solution = {INT_MAX, NULL};
 int count = 0;
 int count2 = 0;
 
-solution branchSimplInit (Graph *G) {
+solution branchementSimpleInit (Graph *G) {
     return branchementSimple(G, NULL, 0) ;    
 }
 
@@ -22,8 +22,6 @@ solution branchementSimple(Graph *g, int *C, int n){
         sol.couverture = C;
         return sol;
     }
-    
-    
     
     // Sinon on prend une arête du graphe {u, v}
     int *arete = uneArete(gCopy);
@@ -104,12 +102,14 @@ solution concatene_sol(solution sol, int *C, int n){
     return s;
 }
 
-solution branchBorneCouplInit(Graph *g) {
-    return branchementBorneCouplage(g, NULL, 0) ;     
+solution branchementBorneCouplageInit(Graph *g) {
+    solution res = branchementBorneCouplage(g, NULL, 0) ;
+    count = 0 ; 
+    return res ; 
 }
 
 solution branchementBorneCouplage(Graph *g, int *C, int n){
-    printf("--%d--\n",count++);
+    //printf("--%d--\n",count++);
     if(g -> nbAretes == 0){
         solution sol;
         sol.cardinal = n;
@@ -138,6 +138,9 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
         }
         meilleure_solution = copy_sol(sol);
     }
+    
+    free(s.couverture) ;
+    free(sol.couverture) ; 
 
     int *arete = uneArete(g);
     int u = arete[0];
@@ -173,8 +176,14 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
     
 }
 
+solution branchementBorneCouplageAmelioreInit(Graph *g) {
+    solution res = branchementBorneCouplage(g, NULL, 0) ; 
+    count = 0 ; 
+    return res ;     
+}
+
 solution branchementBorneCouplageAmeliore(Graph *g, int *C, int n){
-    printf("--%d--\n",count++);
+    //printf("--%d--\n",count++);
     if(g -> nbAretes == 0){
         solution sol;
         sol.cardinal = n;
@@ -241,43 +250,6 @@ solution branchementBorneCouplageAmeliore(Graph *g, int *C, int n){
     free(branche_u.couverture);
     return branche_v;
     
-}
-
-
-Pile *empile (Pile *p, solution *s) {
-    Pile *tete = creeElPile(s) ; 
-    tete->suiv = p ; 
-    return tete ; 
-}
-
-Pile *depile (Pile *p, Pile **el) {
-    if (p) {
-        Pile *newTete = p->suiv ; 
-        *el = p ; 
-        return newTete ; 
-    }
-}
-
-void liberePile (Pile *p) {
-    if (p) {
-        Pile *suiv = p->suiv ;
-        libereElPile(p) ; 
-        liberePile(suiv) ;  
-    }
-}
-
-void libereElPile (Pile *p) {
-    if (p) {
-        free(p->s) ; 
-        free(p) ; 
-    }
-}
-
-Pile *creeElPile (solution *s) {
-    Pile *res = malloc(sizeof(Pile)) ; 
-    res->suiv = NULL ; 
-    res->s = copieSolution(s) ; 
-    return res ; 
 }
 
 solution *copieSolution(solution *s) {

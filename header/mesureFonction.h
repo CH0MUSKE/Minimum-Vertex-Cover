@@ -1,7 +1,6 @@
 #include <time.h>
-#include "./header/operationGraph.h"
+#include "./header/branchBound.h"
 // On définit cette constante pour un nombre raisonnable de sommets dans un graphe
-#define MAXSOMMETS 1500
 
 /*
 Mesure le nombre maximum de sommets possibles dans un graphe généré aléatoirement
@@ -13,7 +12,7 @@ le temps total ne peut pas éxéder 60s
 int tailleMaxGraphe (double tempsMax, float p, int pas, solution (*algo) (Graph*)) ; 
 
 // Calcule les nbPoints de temps de l'algorithme non-glouton 
-double *tempsMoyenAlgo(int nbGraphes, int nbPoints, double p, solution (*algo) (Graph*)) ; 
+double *tempsMoyenAlgo(int nbGraphes, int nbPoints, double p, int maxSommets,solution (*algo) (Graph*)) ; 
 
 /*
 Fonctions à tester : 
@@ -23,3 +22,5 @@ Fonctions à tester :
 - Branchement avec bornes simple
 - Branchement avec bornes améliorées
 */
+
+int ecrireTempsMoyen (double *listeTemps, int nbPoints, int maxSommets, FILE *f) ; 

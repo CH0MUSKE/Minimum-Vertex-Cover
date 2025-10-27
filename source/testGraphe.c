@@ -78,6 +78,7 @@ Graph *altLireGraph(FILE *f) {
 
 
 int main(int argc, char** argv) {
+	/*
 	FILE *f = fopen("exempleinstance.txt", "r") ; 
 	if (f == NULL) {
 		printf("TTK\n") ; 
@@ -87,6 +88,9 @@ int main(int argc, char** argv) {
 
 	solution s = algoGlouton(g) ; 
 	afficheTab(s.couverture, s.cardinal) ; 
+	*/
+
+	
 
 	printf("Fin de fct") ; 	
 	

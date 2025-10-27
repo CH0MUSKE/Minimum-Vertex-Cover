@@ -2,10 +2,22 @@
 #include <stdio.h>
 
 int main(int argc, char** argv) {
-	Graph *g = genereGraphAlea(5, 0.8) ; 
-	afficheGraph(g) ; 
-	solution s = branchSimplInit(g) ; 
-    afficheTab(s.couverture, s.cardinal) ;
+
+    for (int i = 1; i < 1000; i++)
+    {
+        Graph *g = genereGraphAlea(i, 0.4) ; 
+        Couplage c = couplage(g) ; 
+        
+        for (int j = 0; j < c.cardinal; j++)
+        {
+            free(c.couplage[j]) ; 
+        }
+
+        free(c.couplage) ;         
+        freeGraph(g) ; 
+
+    }
+    
 	printf("Fin de fct") ; 
 	
 	

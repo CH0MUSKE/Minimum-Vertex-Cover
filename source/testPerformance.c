@@ -58,6 +58,7 @@ int main(int argc, char** argv) {
         printf("DureeMax : %.3f, TailleMax : %d\n", ((double) i)/2.0, tMax) ; 
     }*/
 
-    freeGraph(g);
-    return 0;
+        freeGraph(g);
+        return 0;
+    }
 }

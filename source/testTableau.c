@@ -28,11 +28,14 @@ int main(int argc, char** argv) {
         tab[j + taille] = -1 ; 
     }
     tab4 = raccourcitListe(tab4, taille * 2, &k) ; 
-    afficheTab(tab3, k) ; 
+    afficheTab(tab4, k) ; 
 
 
 
     free(tab) ; 
+    free(tab2) ; 
+    free(tab3) ; 
+    free(tab4) ; 
 
     return 0 ; 
 }

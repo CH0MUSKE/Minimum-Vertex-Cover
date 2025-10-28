@@ -92,7 +92,7 @@ int *supprimePremierEl (int* tab, int len, int e, int *posElt) {
             res[i] = tab[i] ; 
         }
         free(tab) ; 
-        printf("Error 2\n") ; 
+        printf("Element not removed : %d\n", e) ; 
 
     }
     
@@ -139,7 +139,7 @@ int rechercheIter (int *tab, int len, int e) {
             return i ; 
         }
     }
-    printf("Error 3\n") ; 
+    printf("Element not found : %d\n", e) ; 
     return -1 ; 
 }
 

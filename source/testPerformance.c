@@ -21,9 +21,9 @@ int main(int argc, char** argv) {
 
     */
 
-    double tempsMax = 2.0 ; 
-    int nbIntervalles = 10 ; 
-    int pas = 50 ; 
+    double tempsMax = 1.0 ; 
+    int nbIntervalles = 20 ; 
+    int pas = 20 ; 
     double p = 0.2 ; 
     FILE *f = fopen("data.txt", "w") ; 
 
@@ -39,36 +39,52 @@ int main(int argc, char** argv) {
             p = atof(argv[4]) ; 
 		}
 	}
-	
-    for (int i = 1 ; i < 100 ; i++) {
-
-        Graph *g = genereGraphAlea(i*pas, p) ; 
-    
-        clock_t start = clock();
-        solution t = branchementBorneCouplageInit(g) ; 
-        clock_t end = clock();
-    
-        free(t.couverture) ;  
-        double temps = (float)(end - start) / (float) CLOCKS_PER_SEC;
-        if (temps > tempsMax) {
+    for (int i = 1 ; i < 70 ; i++) {
+        
+        Graph *g ; 
+        
+        clock_t start ;
+        solution t ;
+        clock_t end ;
+        double temp = 0 ; 
+        for (int k = 0 ; k < nbIntervalles ; k++) {
+            g = genereGraphAlea(i*pas, p) ; 
+            start = clock() ; 
+            t = branchementBorneCouplageInit(g) ; 
+            end = clock() ; 
+            free(t.couverture) ;  
+            temp += (float)(end - start) / (float) CLOCKS_PER_SEC ; 
+            freeGraph(g) ; 
+        }
+        fprintf(f, "%.3f, %d\n", temp / nbIntervalles, i*pas) ; 
+        printf("%d\n", i) ; 
+        /*
+        if (temp/nbIntervalles > tempsMax) {
             break;
         }
+        
         */
-    /*for (int i = 0 ; i < 4 ; i++) {
-        int tMax = tailleMaxGraphe (((double) i)/2.0, 0.5, 50, algoCouplage) ; 
-        printf("DureeMax : %.3f, TailleMax : %d\n", ((double) i)/2.0, tMax) ; 
-    }*/
-    Graph *g = genereGraphAlea(25,0.2);
+    }
+    fclose(f) ; 
+    /*
+    printf("Test de tailleMax pour algoGlouton avec tempsMax = %f\n", tempsMax) ; 
+    for (int i = 0 ; i < nbIntervalles ; i++) {
+        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 
+        tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, branchementBorneCouplageInit)) ; 
+    }
+    
+    Graph *g = genereGraphAlea(20,0.2);
+    printf("+++++\n") ; 
+    solution s = branchementBorneCouplageInit(g);
 
-    solution s = branchementBorneCouplage(g, NULL, 0);
+    solution so = branchementBorneCouplageAmelioreInit(g);
 
-    solution so = branchementBorneCouplageAmeliore(g, NULL, 0);
-
-    solution sol = branchementSimple(g,NULL,0);
+    solution sol = branchementSimpleInit(g);
 
 
     printf("%d %d %d\n", s.cardinal, so.cardinal, sol.cardinal);
-
     freeGraph(g);
+    */
+    printf("FinAlgo\n") ; 
     return 0;
 }

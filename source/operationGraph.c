@@ -96,7 +96,8 @@ void freeGraph (Graph *g) {
                 free(g->tabAdjacence[i]) ; 
             }
         }
-        free(g->tabAdjacence) ; 
+        free(g -> tabAdjacence);
+
         free(g) ; 
     }
 }
@@ -179,14 +180,14 @@ Graph *retireSommet (Graph *G, int v) {
 
         for (int i = 0 ; i < res->nbSommets ; i++) {
             if (posValSupprimer != i) {
-                listAdj[i - temp] = res->tabAdjacence[i] ; 
+                listAdj[i - temp] = copieTab(res->tabAdjacence[i], res ->degreSommet[i]) ; 
             }
             else {
                 temp = 1 ; 
             }
         }
 
-        free(res->tabAdjacence) ; 
+        freeTab(res->tabAdjacence, res ->nbSommets) ; 
         res->tabAdjacence = listAdj ; 
         res->tabSommets = retireValTabIndex(res->tabSommets, res->nbSommets, posValSupprimer, &temp) ; 
 		res->nbSommets -= 1 ; 

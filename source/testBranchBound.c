@@ -53,7 +53,6 @@ int main(int argc, char** argv) {
             printf("-%d-",sol.couverture[i]);
         }
         printf("\n-----------\n");
-        ecrireGraph("tamere.txt",g);
         freeGraph(g);
         free(s.couverture);
         free(sol.couverture);

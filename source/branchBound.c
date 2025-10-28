@@ -327,8 +327,8 @@ solution branchementBorneCouplageAmelioreDegMax(Graph *g, int *C, int n){
         free(C);
     }
     
-    solution branche_u = branchementBorneCouplageAmeliore(g_sans_u,C_u,n+1);
-    solution branche_v = branchementBorneCouplageAmeliore(g_sans_v_u_voisins_u,C_v, n+1 + voisins_u.cardinal);
+    solution branche_u = branchementBorneCouplageAmelioreDegMax(g_sans_u,C_u,n+1);
+    solution branche_v = branchementBorneCouplageAmelioreDegMax(g_sans_v_u_voisins_u,C_v, n+1 + voisins_u.cardinal);
 
 
     freeGraph(g_sans_v_u_voisins_u);

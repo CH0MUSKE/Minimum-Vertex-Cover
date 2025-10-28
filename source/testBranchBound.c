@@ -26,24 +26,20 @@ int main(int argc, char** argv) {
     int d = 0;
     int i = 0;
     while(i == 0){
-        Graph *g = genereGraphAlea(5, 1) ; 
-        Graph *h = retireSommet(g,0);
-        printf("%d\n",h == NULL);
-        afficheGraph(g);
-        afficheGraph(h);
+        Graph *g = genereGraphAlea(20, 0.4) ; 
         //solution so = branchementBorneCouplageAmelioreInit(g);
-        //solution s = branchementSimpleInit(g);
+        solution s = branchementSimpleInit(g);
         //solution sol = branchementBorneCouplageInit(g);
         //solution solu = branchementBorneCouplageAmelioreDegMaxInit(g);
-        //a = s.cardinal;
+        a = s.cardinal;
         //b = so.cardinal;
         //c = sol.cardinal;
         //d = solu.cardinal;
-        //printf("%d\n", s.cardinal );
-        //printf("----- simple ------\n");
-        //for(int i = 0; i <a; i++){
-        //    printf("-%d-",s.couverture[i]);
-        //}
+        printf("%d\n", s.cardinal );
+        printf("----- simple ------\n");
+        for(int i = 0; i <a; i++){
+            printf("-%d-",s.couverture[i]);
+        }
         /*printf("\n----- ameliore ------\n");
         for(int i = 0; i <b; i++){
             printf("-%d-",so.couverture[i]);
@@ -56,10 +52,9 @@ int main(int argc, char** argv) {
         for(int i = 0; i <c; i++){
             printf("-%d-",sol.couverture[i]);
         }*/
-        //printf("\n-----------\n");
+        printf("\n-----------\n");
         freeGraph(g);
-        freeGraph(h);
-        //free(s.couverture);
+        free(s.couverture);
         //free(sol.couverture);
         //free(so.couverture);
         //free(solu.couverture);

@@ -144,6 +144,7 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
     if(C != NULL){
         free(sol.couverture);
     }
+    free(s.couverture) ; 
     //free(sol_realisable);
 
     int *arete = uneArete(g);

@@ -22,9 +22,9 @@ int main(int argc, char** argv) {
     */
 
     double tempsMax = 1.0 ; 
-    int nbIntervalles = 20 ; 
-    int pas = 20 ; 
-    double p = 0.2 ; 
+    int nbIntervalles = 10 ; 
+    int pas = 10 ; 
+    double p = 0.8 ; 
     FILE *f = fopen("data.txt", "w") ; 
 
 	if (argc == 5) {
@@ -39,7 +39,8 @@ int main(int argc, char** argv) {
             p = atof(argv[4]) ; 
 		}
 	}
-    for (int i = 1 ; i < 70 ; i++) {
+    
+    for (int i = 1 ; i < 95 ; i++) {
         
         Graph *g ; 
         
@@ -58,15 +59,34 @@ int main(int argc, char** argv) {
         }
         fprintf(f, "%.3f, %d\n", temp / nbIntervalles, i*pas) ; 
         printf("%d\n", i) ; 
-        /*
-        if (temp/nbIntervalles > tempsMax) {
-            break;
-        }
-        
-        */
+
     }
     fclose(f) ; 
     /*
+    for (int i = 1 ; i < 70 ; i++) {
+        
+        Graph *g ; 
+        
+        solution t1, t2, t3 ;
+        double temp = 0 ; 
+        
+        g = genereGraphAlea(i*pas, p) ; 
+        t1 = branchementBorneCouplageAmelioreInit(g) ; 
+        t2 = algoCouplage(g) ; 
+        t3 = algoGlouton(g) ; 
+        
+        freeGraph(g) ; 
+        free(t1.couverture) ;  
+        free(t2.couverture) ;  
+        free(t3.couverture) ;  
+        
+        fprintf(f, "%d, %d, %d, %d\n", i*pas, t1.cardinal, t2.cardinal, t3.cardinal) ; 
+        printf("%d\n", i) ; 
+
+    }
+    fclose(f) ; 
+
+
     printf("Test de tailleMax pour algoGlouton avec tempsMax = %f\n", tempsMax) ; 
     for (int i = 0 ; i < nbIntervalles ; i++) {
         printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 

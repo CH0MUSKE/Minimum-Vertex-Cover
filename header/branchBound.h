@@ -11,7 +11,7 @@ retirés du graphe et n la taille du tableau des sommets retirés
 solution branchementSimple(Graph *g, int *C, int n) ; 
 solution branchementSimpleInit(Graph *g) ;
 
-int testElag(Graph *g, int cur_n, int ameliore) ; 
+int testElag(Graph *g, int cur_n) ; 
 /*
 Applique l'algorithme de branchement avec borne, 
 sachant que C représente les sommets déjà retirés du graphe et 

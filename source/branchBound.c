@@ -107,6 +107,11 @@ solution branchementBorneCouplageInit(Graph *g) {
 }
 
 solution branchementBorneCouplage(Graph *g, int *C, int n){
+    
+    /*
+    Si le graphe ne contient aucune arête ou bien est vide, on 
+    considère que l'on a une solution optimale
+    */
     if(g == NULL || g -> nbAretes == 0){
         solution sol;
         sol.cardinal = n;
@@ -119,6 +124,9 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
         }
         return sol;
     }
+    /*
+    Si on ne respecte pas la borne inf, on élague 
+    */
     if(testElag(g,n)){
         solution s = copy_sol(meilleure_solution);
         free(C);

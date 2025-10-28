@@ -46,7 +46,7 @@ int *copieTab (int *tab, int len) {
         }
     }
     else if (!res) {
-        printf("Critical copy error\n") ; 
+        printf("====Critical copy error====\n") ; 
         return NULL ; 
     }
     
@@ -66,36 +66,29 @@ int *supprimePremierEl (int* tab, int len, int e, int *posElt) {
         if (len != 1) {
             res = malloc(sizeof(int) * (len - 1)) ; 
             int q = 0 ; 
+            if (!res) {
+                printf("====Memory not allocated in supprimePremierEl====\n") ; 
+            }
             for (int i = 0 ; i < len ; i++) {
                 if (index != i) {
-                    if (!res) {
-                        printf("BABA %d\n", len - 1) ; 
-                    }
                     res[i - q] = tab[i] ; 
                 }
                 else {
                     q = 1 ; 
                 }
             }
-            // GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOD DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMMIT
-            // forgot to put free(tab) :)))))))))))))))))
-            // lost 2 hours but that's fine :))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
-            free(tab) ; 
-        }
-        else {
-            free(tab) ; 
         }
     }
+
     else {
         res = malloc(sizeof(int) * (len)) ; 
         for (int i = 0 ; i < len ; i++) {
             res[i] = tab[i] ; 
         }
-        free(tab) ; 
         printf("Element not removed : %d\n", e) ; 
-
     }
-    
+
+    free(tab) ; 
     *posElt = index ; 
     return res ; 
 }

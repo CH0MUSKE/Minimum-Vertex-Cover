@@ -146,7 +146,6 @@ Graph *retireSommet (Graph *G, int v) {
 		2.1. Détruire le sommet v de cette liste 
 	3. Détruire la liste des adjacents du sommet v 
 	*/
-
     
     Graph *res = copieGraph(G) ; 
     
@@ -186,6 +185,7 @@ Graph *retireSommet (Graph *G, int v) {
                 temp = 1 ; 
             }
         }
+
         free(res->tabAdjacence) ; 
         res->tabAdjacence = listAdj ; 
         res->tabSommets = retireValTabIndex(res->tabSommets, res->nbSommets, posValSupprimer, &temp) ; 

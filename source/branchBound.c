@@ -143,10 +143,8 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
     int u = arete[0];
     int v = arete[1];
     free(arete);
-    Graph *gcpy1 = copieGraph(g);
-    Graph *gcpy2 = copieGraph(g);
-    Graph *g_sans_u = retireSommet(gcpy1,u);
-    Graph *g_sans_v = retireSommet(gcpy2,v);
+    Graph *g_sans_u = retireSommet(g,u);
+    Graph *g_sans_v = retireSommet(g,v);
     int *C_u = malloc(sizeof(int) * (n+1));
     int *C_v = malloc(sizeof(int) * (n+1));
     if(C != NULL){
@@ -213,15 +211,13 @@ solution branchementBorneCouplageAmeliore(Graph *g, int *C, int n){
     int v = arete[1];
     free(arete);
     
-    Graph *gcpy1 = copieGraph(g);
-    Graph *gcpy5 = copieGraph(g);
-    Graph *g_sans_u = retireSommet(gcpy1,u);
-    Graph *g_sans_v = retireSommet(gcpy5,v);
-    Graph *gcpy4 = copieGraph(g_sans_u);
-    Graph *g_sans_v_u = retireSommet(gcpy4,v);
+
+    Graph *g_sans_u = retireSommet(g,u);
+    Graph *g_sans_v = retireSommet(g,v);
+    Graph *g_sans_v_u = retireSommet(g_sans_u,v);
     solution voisins_u = voisins(g_sans_v,u);
-    Graph *gcpy2 = copieGraph(g_sans_v_u);
-    Graph *g_sans_v_u_voisins_u = retireEnsembleSommet(gcpy2,voisins_u.couverture,voisins_u.cardinal);
+
+    Graph *g_sans_v_u_voisins_u = retireEnsembleSommet(g_sans_v_u,voisins_u.couverture,voisins_u.cardinal);
 
     int *C_u = malloc(sizeof(int) * (n+1));
     int *C_v = malloc(sizeof(int) * (n+1 + voisins_u.cardinal));
@@ -304,15 +300,15 @@ solution branchementBorneCouplageAmelioreDegMax(Graph *g, int *C, int n){
     int u = g->tabSommets[indexMax];
     int v = g ->tabAdjacence[indexMax][0];
     
-    Graph *gcpy1 = copieGraph(g);
-    Graph *gcpy5 = copieGraph(g);
-    Graph *g_sans_u = retireSommet(gcpy1,u);
-    Graph *g_sans_v = retireSommet(gcpy5,v);
-    Graph *gcpy4 = copieGraph(g_sans_u);
-    Graph *g_sans_v_u = retireSommet(gcpy4,v);
+
+
+    Graph *g_sans_u = retireSommet(g,u);
+    Graph *g_sans_v = retireSommet(g,v);
+    
+    Graph *g_sans_v_u = retireSommet(g_sans_u,v);
     solution voisins_u = voisins(g_sans_v,u);
-    Graph *gcpy2 = copieGraph(g_sans_v_u);
-    Graph *g_sans_v_u_voisins_u = retireEnsembleSommet(gcpy2,voisins_u.couverture,voisins_u.cardinal);
+    
+    Graph *g_sans_v_u_voisins_u = retireEnsembleSommet(g_sans_v_u,voisins_u.couverture,voisins_u.cardinal);
 
     int *C_u = malloc(sizeof(int) * (n+1));
     int *C_v = malloc(sizeof(int) * (n+1 + voisins_u.cardinal));

@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 		}
 	}
     
-    for (int i = 1 ; i < 95 ; i++) {
+    for (int i = 1 ; i < 15 ; i++) {
         
         Graph *g ; 
         
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
         for (int k = 0 ; k < nbIntervalles ; k++) {
             g = genereGraphAlea(i*pas, p) ; 
             start = clock() ; 
-            t = branchementBorneCouplageInit(g) ; 
+            t = branchementBorneCouplageAmelioreDegMaxInit(g) ; 
             end = clock() ; 
             free(t.couverture) ;  
             temp += (float)(end - start) / (float) CLOCKS_PER_SEC ; 

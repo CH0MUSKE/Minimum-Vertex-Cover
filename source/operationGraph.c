@@ -54,8 +54,6 @@ Graph *genereGraphAlea (int n, float p) {
     // Au numéro présent, pour éviter des doubles arcs 
     for (int i = 0 ; i < res->nbSommets ; i++) {
         
-        // ########################## Changer valRandom en : 
-        // Génerateur de nombre random https://blog.bithole.dev/blogposts/random-float/
         for (int j = i + 1 ; j < res->nbSommets ; j++) {
             if (valRandom() < p) {
                 
@@ -152,7 +150,7 @@ Graph *retireSommet (Graph *G, int v) {
     
     Graph *res = copieGraph(G) ; 
     
-	freeGraph(G) ; 
+	// freeGraph(G) ; 
 	int posValSupprimer = calculeIndexValeur(res->tabSommets, res->nbSommets, v) ; 
 	if (posValSupprimer != -1 && res->nbSommets > 1) {
         // Etape 2 
@@ -204,7 +202,7 @@ Graph *retireSommet (Graph *G, int v) {
 
 Graph *retireEnsembleSommet (Graph *g, int *tab, int len) {
     Graph *res = copieGraph(g) ; 
-    freeGraph(g) ; 
+    // freeGraph(g) ; 
     for (int i = 0 ; i < len ; i++) {
         
         if (res) {

@@ -127,10 +127,15 @@ int *retireValTabIndex(int *tab, int len, int index, int *estSupprime) {
 
 int rechercheIter (int *tab, int len, int e) {
     // Cherche e dans tab par recherche itérative 
-    for (int i = 0 ; i < len ; i++) {
-        if (tab[i] == e) {
-            return i ; 
+    if (tab) {
+        for (int i = 0 ; i < len ; i++) {
+            if (tab[i] == e) {
+                return i ; 
+            }
         }
+    }
+    else {
+        printf("====RechercheIter : tab does not exist====\n") ; 
     }
     printf("Element not found : %d\n", e) ; 
     return -1 ; 

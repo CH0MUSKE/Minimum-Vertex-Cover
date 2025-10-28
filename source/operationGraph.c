@@ -96,7 +96,7 @@ void freeGraph (Graph *g) {
                 free(g->tabAdjacence[i]) ; 
             }
         }
-
+        free(g->tabAdjacence) ; 
         free(g) ; 
     }
 }
@@ -149,7 +149,6 @@ Graph *retireSommet (Graph *G, int v) {
     
     Graph *res = copieGraph(G) ; 
     
-	// freeGraph(G) ; 
 	int posValSupprimer = calculeIndexValeur(res->tabSommets, res->nbSommets, v) ; 
 	if (posValSupprimer != -1 && res->nbSommets > 1) {
         // Etape 2 
@@ -177,6 +176,7 @@ Graph *retireSommet (Graph *G, int v) {
         int **listAdj = malloc(sizeof(int*) * (res->nbSommets - 1)) ; 
 
         temp = 0 ; 
+
         for (int i = 0 ; i < res->nbSommets ; i++) {
             if (posValSupprimer != i) {
                 listAdj[i - temp] = res->tabAdjacence[i] ; 
@@ -191,7 +191,6 @@ Graph *retireSommet (Graph *G, int v) {
         res->tabSommets = retireValTabIndex(res->tabSommets, res->nbSommets, posValSupprimer, &temp) ; 
 		res->nbSommets -= 1 ; 
         
-        
 	}
     else if (posValSupprimer != -1 && res->nbSommets == 1) {
         freeGraph(res) ; 
@@ -202,11 +201,13 @@ Graph *retireSommet (Graph *G, int v) {
 
 Graph *retireEnsembleSommet (Graph *g, int *tab, int len) {
     Graph *res = copieGraph(g) ; 
-    // freeGraph(g) ; 
+    
     for (int i = 0 ; i < len ; i++) {
         
         if (res) {
-            res = retireSommet(res, tab[i]) ; 
+            Graph *temp = retireSommet(res, tab[i]) ; 
+            freeGraph(res) ; 
+            res = temp ; 
         }
         else {
             return res ; 

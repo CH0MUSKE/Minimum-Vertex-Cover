@@ -53,21 +53,10 @@ int main(int argc, char** argv) {
         if (temps > tempsMax) {
             break;
         }
-        */
     /*for (int i = 0 ; i < 4 ; i++) {
         int tMax = tailleMaxGraphe (((double) i)/2.0, 0.5, 50, algoCouplage) ; 
         printf("DureeMax : %.3f, TailleMax : %d\n", ((double) i)/2.0, tMax) ; 
     }*/
-    Graph *g = genereGraphAlea(25,0.2);
-
-    solution s = branchementBorneCouplage(g, NULL, 0);
-
-    solution so = branchementBorneCouplageAmeliore(g, NULL, 0);
-
-    solution sol = branchementSimple(g,NULL,0);
-
-
-    printf("%d %d %d\n", s.cardinal, so.cardinal, sol.cardinal);
 
     freeGraph(g);
     return 0;

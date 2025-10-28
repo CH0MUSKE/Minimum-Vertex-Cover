@@ -364,7 +364,6 @@ int indexSommetDegMax (Graph *G) {
     }
     return -1 ; 
 }
-/* 
 
 int map_indice_sommet(int nbSommets,int *tabSommets, int sommet){
     for(int i = 0; i < nbSommets; i++){
@@ -616,11 +615,12 @@ int ecrireGraph(char *nom, Graph *g){
     close(fd);
     return r;
 }
-*/
+
+
 
 solution voisins(Graph *g, int sommet) {
     solution res ; 
-    int i = calculeIndexValeur(g->tabSommets, g->nbAretes, sommet) ; 
+    int i = calculeIndexValeur(g->tabSommets, g->nbSommets, sommet) ; 
     if (i != -1) {
         res.couverture = copieTab(g->tabAdjacence[i], g->degreSommet[i]) ; 
         res.cardinal = g->degreSommet[i] ; 

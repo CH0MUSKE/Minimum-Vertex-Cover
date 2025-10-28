@@ -24,6 +24,8 @@ solution branchementBorneCouplageInit (Graph *G) ;
 solution branchementBorneCouplageAmeliore(Graph *g, int *C, int n) ; 
 solution branchementBorneCouplageAmelioreInit (Graph *g) ; 
 
+solution branchementBorneCouplageAmelioreDegMaxInit(Graph *g);
+
 
 
 solution *copieSolution (solution *s) ; 

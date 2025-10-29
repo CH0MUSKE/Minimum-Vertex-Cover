@@ -52,5 +52,7 @@ testPerformance : $(OBJS) $(OBJ_DIR)/testPerformance.o
 testBranchBound : $(OBJS) $(OBJ_DIR)/testBranchBound.o 
 	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^ -lm
 
+Main : $(OBJS) $(OBJ_DIR)/Main.o 
+	$(CC) $(CFLAGS) -o $(EXE_DIR)/$@ $^ -lm
 stu : 
 	echo $(OBJS)

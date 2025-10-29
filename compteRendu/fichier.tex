@@ -216,6 +216,17 @@ on a :
 Ainsi, $C'$ est également une couverture optimale de $G$.\\
 Il est donc toujours possible de trouver une couverture optimale qui ne contient pas le sommet $u$ de degré $1$.
 
+\subsubsection*{Partie 4}
+1. D'après les mesures expérimentaux, on remarque que l'algorithme de couplage fournit en moyenne une solution
+environ 10\% plus grande que l'optimum calculé à partir de l'algo BranchBound, avec un pire rapport de 1.4.
+De l'autre coté, l'algorithme glouton semble être plus performant avec un rapport d'approximation moyen de 1.01
+et avec un pire rapport de seulement 1.02.
+Cela s’explique par le fait que, sur des graphes denses (p = 0.8),
+le glouton choisit en priorité les sommets à fort degré, 
+supprimant ainsi plus d’arêtes à chaque itération, tandis que le couplage ajoute 
+systématiquement deux sommets, souvent redondants.
+
+
 \section{Analyse théorique}
  
 \subsection*{Exercice 3}

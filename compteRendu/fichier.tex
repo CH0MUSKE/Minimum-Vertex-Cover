@@ -235,13 +235,92 @@ Il est donc toujours possible de trouver une couverture optimale qui ne contient
   \includegraphics[width=\linewidth]{Images/MaxGlouton.png}
 \end{subfigure}
 \end{figure}
-On peut observer que dans les deux algorithmes la taille maximal est inversement proportionnelle 
+On peut observer que dans les deux algorithmes, la taille maximal est inversement proportionnelle 
 à la quantité d'arêtes présentes dans le graphe. Ceci est dû au fait que plus le graphe est dense, plus 
-on a d'arêtes à retirer pour chaque suppression de sommet, ce qui ralentit le programme. 
-
+on a d'arêtes à retirer pour chaque suppression de sommet. 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width = 0.8\linewidth]{Images/PerfBranchementSimple.png}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{Images/PerfCouplage.png}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{Images/PerfGlouton.png}
+\end{subfigure}
 \end{figure}
+
+Le temps d'éxécution est exponentiel en fonction du nombre de sommets, ceci est dû au fait 
+que la complexité de la fonction de suppression d'un sommet du graphe ne dépend pas que 
+du nombre de sommets, mais aussi du nombre d'arêtes, qui est quadratique en fonction du nombre de 
+sommets du graphe. 
+
+\subsection*{Exercice 4}
+
+\subsubsection*{Partie 1}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.7\linewidth]{Images/PerfBranchementSimple.png}
+\end{figure}
+On voit que la vitesse de l'algorithme est corrélé positivement avec la densité du graphe, 
+plus le graphe est dense, donc plus p est grand, plus l'algorithme est lent. 
+Ceci est directement lié au fait que le nombre de noeuds visité dans un algorithme de branchement 
+est égal à $2^m$, avec m le nombre d'arêtes du graphe. On a donc un temps d'exécution exponentiel 
+en fonction du nombre de sommets. 
+
+\subsubsection*{Partie 2}
+2.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width = 0.7\linewidth]{Images/PerfBranchBound.png}
+\end{figure}
+
+Similairement à la version sans borne, on a une corrélation positive entre p et la vitesse 
+de l'algorithme. 
+On voit aussi que malgé l'ajout des bornes, les performances de l'algorithme de branch 
+and bound sont similaires à celles sans bornes. Nos bornes ne sont donc pas 
+assez restrictives pour permettre un bon élagage de l'arbre. 
+
+\subsubsection*{Partie 3}
+
+\begin{figure}[H]
+
+  \centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width = \linewidth]{Images/PerfBranchBoundV2.png}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width = \linewidth]{Images/PerfBranchBoundV3.png}
+\end{subfigure}
+  \centering
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.7\linewidth]{Images/PerfBranchBoundV4.png}
+\end{figure}
+
+Cependant, lorsque on retire u ainsi que tout les sommets voisins de u quand on 
+examine le graphe avec le sommet v dans la couverture, on obtient de bien meilleures 
+performances, avec des temps d'exécutions qui sont en-dessous de 0,1 secondes tant 
+que le nombre de sommet est inférieur à 50, ce qui est bien meilleur quand comparé aux 
+deux versions précédentes. \\
+Cette fois-ci, on a une corrélation négative entre p et la vitesse de l'algorithme. 
+Ceci est dû au fait que si le graphe n'est pas dense, retirer un sommet ainsi que tout ses voisins 
+ne va pas retirer beaucoup de sommets, et va donc forcer l'algorithme a explorer plus de noeuds. \\
+On peut aussi voir que notre heuristique de toujours sélectionner u de sorte à ce qu'il soit 
+de degré maximal est une bonne heuristique, les temps de calculs pour des graphes avec 70 
+sommets étant d'environ 2 secondes dans le pire cas pour le branch and bound amélioré, 
+alors qu'ils sont d'environ 1 seconde en prenant le sommet de degré maximal, qui est réduit 
+à 0,25 quand on combine 
+
+
+
+
+
+
 \end{document}

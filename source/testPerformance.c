@@ -2,36 +2,10 @@
 
 int main(int argc, char** argv) {
 
-    /*
-    Algo couverture 
-    DureeMax : 0.500, TailleMax : 1250
-    DureeMax : 1.000, TailleMax : 1600
-    DureeMax : 1.500, TailleMax : 1850
-    DureeMax : 2.000, TailleMax : 2000
-    DureeMax : 2.500, TailleMax : 2200
-    DureeMax : 3.000, TailleMax : 2300
-
-    Algo glouton 
-    DureeMax : 0.500, TailleMax : 1350
-    DureeMax : 1.000, TailleMax : 1700
-    DureeMax : 1.500, TailleMax : 1950
-    DureeMax : 2.000, TailleMax : 2150
-    DureeMax : 2.500, TailleMax : 2300
-    DureeMax : 3.000, TailleMax : 2450
-
-    Maximums : 
-    Branch : 20 
-    Branch : 25
-    Branch : 70 
-    Branch : 100 
-    Branch : 100
-
-    */
-
     double tempsMax = 0.5 ; 
     int nbIntervalles = 3 ; 
     int pas = 5 ; 
-    double p = 0.8 ; 
+    double p = 0.2 ; 
     int nbGraphes = 20 ; 
     int nbPoints = 10 ; 
     int maxSommets = 100 ;  
@@ -51,13 +25,35 @@ int main(int argc, char** argv) {
 	}
     
     double *res = tempsMoyenAlgo(nbGraphes, nbPoints, p, maxSommets, branchementBorneCouplageAmelioreDegMaxTestDeg1Init) ; 
-
     for (int i = 0 ; i < nbPoints ; i++) {
         fprintf(f, "%d, %.3f\n", (i+1) * (maxSommets / nbPoints), res[i]) ; 
     }
     free(res) ; 
     /*
-    for (int i = 1 ; i < 25 ; i++) {
+    for (int i = 1 ; i < 35 ; i++) {
+        
+        Graph *g ; 
+        
+        solution t1, t2, t3 ;
+        double temp = 0 ; 
+        
+        g = genereGraphAlea(i*pas, p) ; 
+        t1 = branchementBorneCouplageAmelioreDegMaxInit(g) ; 
+        t2 = algoCouplage(g) ; 
+        t3 = algoGlouton(g) ; 
+        
+        freeGraph(g) ; 
+        free(t1.couverture) ;  
+        free(t2.couverture) ;  
+        free(t3.couverture) ;  
+        
+        fprintf(f, "%d, %d, %d, %d\n", i*pas, t1.cardinal, t2.cardinal, t3.cardinal) ; 
+        printf("%d\n", i) ; 
+        
+        }
+        fclose(f) ; 
+        
+        for (int i = 1 ; i < 25 ; i++) {
         
         Graph *g ; 
         
@@ -99,28 +95,6 @@ int main(int argc, char** argv) {
 
 
 
-    for (int i = 1 ; i < 70 ; i++) {
-        
-        Graph *g ; 
-        
-        solution t1, t2, t3 ;
-        double temp = 0 ; 
-        
-        g = genereGraphAlea(i*pas, p) ; 
-        t1 = branchementBorneCouplageAmelioreInit(g) ; 
-        t2 = algoCouplage(g) ; 
-        t3 = algoGlouton(g) ; 
-        
-        freeGraph(g) ; 
-        free(t1.couverture) ;  
-        free(t2.couverture) ;  
-        free(t3.couverture) ;  
-        
-        fprintf(f, "%d, %d, %d, %d\n", i*pas, t1.cardinal, t2.cardinal, t3.cardinal) ; 
-        printf("%d\n", i) ; 
-
-    }
-    fclose(f) ; 
 
 
     

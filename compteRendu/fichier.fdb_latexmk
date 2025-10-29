@@ -1,9 +1,15 @@
 # Fdb version 4
-["pdflatex"] 1761771571.81531 "c:/Users/Andy/Documents/Shared_Files_Folder/projComplex/compteRendu/fichier.tex" "fichier.pdf" "fichier" 1761771572.42635 0
+["pdflatex"] 1761776053.78565 "c:/Users/Andy/Documents/Shared_Files_Folder/projComplex/compteRendu/fichier.tex" "fichier.pdf" "fichier" 1761776054.54384 0
   "Images/MaxCouplage.png" 1761771409 39242 c4331924534c0ea95ccfe33477389d91 ""
   "Images/MaxGlouton.png" 1761771402 40678 cfb3a5ff31370a4ff9742fadddef7e07 ""
+  "Images/PerfBranchBound.png" 1761770048 30643 11c4ec58d2d20fedc26417f337fabb87 ""
+  "Images/PerfBranchBoundV2.png" 1761770056 34580 5e43663de13ea89caac03b9ebecb1485 ""
+  "Images/PerfBranchBoundV3.png" 1761770064 30334 a43cdd1bb68a8932df0391b971a3eb17 ""
+  "Images/PerfBranchBoundV4.png" 1761770074 37496 59a12fa0f5cf9b1c920585ea37e55ff6 ""
   "Images/PerfBranchementSimple.png" 1761769849 30006 6ff6d0654d6dddac4db7cdb3b0c94ab3 ""
-  "c:/Users/Andy/Documents/Shared_Files_Folder/projComplex/compteRendu/fichier.tex" 1761771571 7601 f75803fba3007fc2b30d77e291bb4d2f ""
+  "Images/PerfCouplage.png" 1761769838 35980 a95f225988e75b5f68659ce4bb0d30dc ""
+  "Images/PerfGlouton.png" 1761769829 34615 84c6c2cf76c6560e90060b3c0f32b948 ""
+  "c:/Users/Andy/Documents/Shared_Files_Folder/projComplex/compteRendu/fichier.tex" 1761776053 10728 9ee896294b12d521b99c2bab3e4bf07c ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1760716187 2971 def0b6c1f0b107b3b936def894055589 ""
   "c:/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1760716704 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1760716485 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -78,9 +84,9 @@
   "c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1760718888 5574153 af86687748baf417d9e7d549313527be ""
   "c:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1760718989 3629072 34f1978d9a20f6633889792c1b81dd60 ""
   "c:/texlive/2025/texmf.cnf" 1760718876 713 e69b156964470283e0530f5060668171 ""
-  "fichier.aux" 1761771572 773 37fbe66b4820aa4dda7456a9adf27357 "pdflatex"
-  "fichier.tex" 1761771571 7601 f75803fba3007fc2b30d77e291bb4d2f ""
-  "fichier.toc" 1761771572 376 ce4b65c51dd8300897e99d39fa50a4f9 "pdflatex"
+  "fichier.aux" 1761776054 773 f358858993168101a8604de5f413a32e "pdflatex"
+  "fichier.tex" 1761776053 10728 9ee896294b12d521b99c2bab3e4bf07c ""
+  "fichier.toc" 1761776054 376 ce4b65c51dd8300897e99d39fa50a4f9 "pdflatex"
   (generated)
   "fichier.aux"
   "fichier.log"

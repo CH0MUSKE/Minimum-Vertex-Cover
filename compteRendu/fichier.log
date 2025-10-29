@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.17)  29 OCT 2025 21:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.10.17)  29 OCT 2025 23:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -356,34 +356,68 @@ File: Images/MaxGlouton.png Graphic file (type png)
 <use Images/MaxGlouton.png>
 Package pdftex.def Info: Images/MaxGlouton.png  used on input line 235.
 (pdftex.def)             Requested size: 236.01561pt x 177.94745pt.
-<Images/PerfBranchementSimple.png, id=24, 455.301pt x 343.2825pt>
+<Images/PerfCouplage.png, id=24, 455.301pt x 343.2825pt>
+File: Images/PerfCouplage.png Graphic file (type png)
+<use Images/PerfCouplage.png>
+Package pdftex.def Info: Images/PerfCouplage.png  used on input line 246.
+(pdftex.def)             Requested size: 236.01561pt x 177.94745pt.
+<Images/PerfGlouton.png, id=25, 455.301pt x 343.2825pt>
+File: Images/PerfGlouton.png Graphic file (type png)
+<use Images/PerfGlouton.png>
+Package pdftex.def Info: Images/PerfGlouton.png  used on input line 250.
+(pdftex.def)             Requested size: 236.01561pt x 177.94745pt.
+
+
+[3 <./Images/MaxCouplage.png> <./Images/MaxGlouton.png> <./Images/PerfCouplage.png> <./Images/PerfGlouton.png>]
+<Images/PerfBranchementSimple.png, id=34, 455.301pt x 343.2825pt>
 File: Images/PerfBranchementSimple.png Graphic file (type png)
 <use Images/PerfBranchementSimple.png>
-Package pdftex.def Info: Images/PerfBranchementSimple.png  used on input line 245.
-(pdftex.def)             Requested size: 377.62642pt x 284.72534pt.
+Package pdftex.def Info: Images/PerfBranchementSimple.png  used on input line 265.
+(pdftex.def)             Requested size: 330.42041pt x 249.1327pt.
+<Images/PerfBranchBound.png, id=35, 455.301pt x 343.2825pt>
+File: Images/PerfBranchBound.png Graphic file (type png)
+<use Images/PerfBranchBound.png>
+Package pdftex.def Info: Images/PerfBranchBound.png  used on input line 277.
+(pdftex.def)             Requested size: 330.42041pt x 249.1327pt.
 
 
-[3 <./Images/MaxCouplage.png> <./Images/MaxGlouton.png>]
+[4 <./Images/PerfBranchementSimple.png> <./Images/PerfBranchBound.png>]
+<Images/PerfBranchBoundV2.png, id=41, 455.301pt x 343.2825pt>
+File: Images/PerfBranchBoundV2.png Graphic file (type png)
+<use Images/PerfBranchBoundV2.png>
+Package pdftex.def Info: Images/PerfBranchBoundV2.png  used on input line 293.
+(pdftex.def)             Requested size: 236.01561pt x 177.94745pt.
+<Images/PerfBranchBoundV3.png, id=42, 455.301pt x 343.2825pt>
+File: Images/PerfBranchBoundV3.png Graphic file (type png)
+<use Images/PerfBranchBoundV3.png>
+Package pdftex.def Info: Images/PerfBranchBoundV3.png  used on input line 297.
+(pdftex.def)             Requested size: 236.01561pt x 177.94745pt.
+<Images/PerfBranchBoundV4.png, id=43, 463.9734pt x 343.2825pt>
+File: Images/PerfBranchBoundV4.png Graphic file (type png)
+<use Images/PerfBranchBoundV4.png>
+Package pdftex.def Info: Images/PerfBranchBoundV4.png  used on input line 304.
+(pdftex.def)             Requested size: 330.42041pt x 244.47084pt.
 
-[4 <./Images/PerfBranchementSimple.png>] (./fichier.aux)
+
+[5 <./Images/PerfBranchBoundV2.png> <./Images/PerfBranchBoundV3.png> <./Images/PerfBranchBoundV4.png>] (./fichier.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 7186 strings out of 467747
- 119025 string characters out of 5431116
+ 7228 strings out of 467747
+ 120398 string characters out of 5431116
  544267 words of memory out of 5000000
- 35819 multiletter control sequences out of 15000+600000
+ 35861 multiletter control sequences out of 15000+600000
  636262 words of font info for 57 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 57i,9n,65p,327b,404s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,9n,65p,327b,407s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on fichier.pdf (4 pages, 262597 bytes).
+Output written on fichier.pdf (5 pages, 443104 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
+ 105 PDF objects out of 1000 (max. 8388607)
+ 53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

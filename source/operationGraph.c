@@ -281,11 +281,14 @@ Couplage couplage(Graph *g) {
             c.cardinal++;
         }
     }
-    
-    for (int i = 0 ; i < g->nbAretes ; i++) {
-        free(listAr[i]) ; 
+    int **cpy = malloc(sizeof(int *) * c.cardinal);
+    for(int i = 0; i < c.cardinal; i++){
+        cpy[i] = copieTab(c.couplage[i],2);
     }
-    free(listAr) ; 
+    freeTab(c.couplage,g -> nbAretes);
+    c.couplage = cpy;
+    
+    freeTab(listAr,g -> nbAretes);
 
     return c; // n'est pas forcément la taille exacte, mais tu peux renvoyer n séparément
 }
@@ -308,10 +311,12 @@ solution algoCouplage(Graph *G) {
                 aRetirer[0] = grapheCourant->tabSommets[i] ; 
                 aRetirer[1] = grapheCourant->tabAdjacence[i][j] ; 
                 
-                grapheCourant = retireEnsembleSommet(
+                Graph *h= retireEnsembleSommet(
                     grapheCourant, 
                     aRetirer, 
-                    2 ) ; 
+                    2 ); 
+                freeGraph(grapheCourant);    
+                grapheCourant = h;
                     
                 
                 res.couverture[nbSommetsCouverture] = aRetirer[0] ; 

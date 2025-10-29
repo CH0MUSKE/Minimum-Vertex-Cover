@@ -56,7 +56,7 @@ les performances brutes des algos étudiés.
 Nous commencerons par répondre aux questions théoriques dans un premier temps puis on finira par 
 comparer les différents algos avec l'aide de différents graphiques illustrant leur performance.
 
-\section{Réponses aux questions}
+\section{Questions théoriques}
 
 \subsection{Exercice 3}
 
@@ -88,12 +88,9 @@ une couverture de taille 10. Or une autre solution de taille inférieure serait 
 les sommets de $V_2$, puis $s_0$, ce qui donne une couverture de taille 9. Donc l'algorithme 
 glouton n'est pas optimal, et n'est pas 1-approché.\\
 
-3. Réduction de Stable de taille au moins n - kn à Couverture de taille plus k ? 
+% 3. Réduction de Stable de taille au moins n - kn à Couverture de taille plus k ? 
 
 \subsection{Exercice 4}
-
-\subsubsection*{Partie 1}
-
 
 \subsubsection*{Partie 2}
 1.$b_1$ : Soit $S$ défini comme 
@@ -132,7 +129,7 @@ Ainsi, pour toute arête $(u,v) \in M \subseteq E$, on a nécessairement que
 \[
 u \in C \quad \text{ou} \quad v \in C,
 \]
-car chaque arête doit être couverte par au moins un sommet de $C$. //
+car chaque arête doit être couverte par au moins un sommet de $C$. \\
 On en déduit donc que
 \[
 |C| \ge |M|.
@@ -216,7 +213,7 @@ on a :
 \[
 |C'| = |C| \quad \text{et} \quad C' \text{ couvre bien toutes les arêtes de } G.
 \]
-Ainsi, $C'$ est également une couverture optimale de $G$.//
+Ainsi, $C'$ est également une couverture optimale de $G$.\\
 Il est donc toujours possible de trouver une couverture optimale qui ne contient pas le sommet $u$ de degré $1$.
 
 \section{Analyse théorique}
@@ -316,8 +313,7 @@ On peut aussi voir que notre heuristique de toujours sélectionner u de sorte à
 de degré maximal est une bonne heuristique, les temps de calculs pour des graphes avec 70 
 sommets étant d'environ 2 secondes dans le pire cas pour le branch and bound amélioré, 
 alors qu'ils sont d'environ 1 seconde en prenant le sommet de degré maximal, qui est réduit 
-à 0,25 quand on combine 
-
+à 0,25 quand on y ajoute le retrait des sommets de degré 1.\\
 
 
 

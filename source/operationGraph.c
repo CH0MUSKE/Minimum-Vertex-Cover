@@ -350,7 +350,9 @@ solution algoGlouton(Graph *G) {
     while (grapheCourant && grapheCourant->nbAretes > 0) {
         int indexSommetMaximal = indexSommetDegMax(grapheCourant) ; 
         res.couverture[nbSommetsCouverture] = grapheCourant->tabSommets[indexSommetMaximal] ; 
-        grapheCourant = retireSommet(grapheCourant, grapheCourant->tabSommets[indexSommetMaximal]) ; 
+        Graph *temp = retireSommet(grapheCourant, grapheCourant->tabSommets[indexSommetMaximal]) ; 
+        freeGraph(grapheCourant) ; 
+        grapheCourant = temp ; 
         nbSommetsCouverture += 1 ; 
     }
     if (grapheCourant) {

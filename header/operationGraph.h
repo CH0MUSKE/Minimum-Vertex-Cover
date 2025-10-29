@@ -44,21 +44,16 @@ void afficheGraph(Graph *G) ;
 // Copie le graphe passé en paramètre, ne détruit pas le graphe passé en paramètre 
 Graph *copieGraph (Graph *G) ; 
 
-// Retire le sommet de label v du graphe G, détruit le graphe G 
+// Retire le sommet de label v du graphe G
 Graph *retireSommet (Graph *G, int v) ; 
 
-// Retire les sommets donts les labels sont dans tab du graphe G, détruit le graphe G 
+// Retire les sommets donts les labels sont dans tab du graphe G
 Graph *retireEnsembleSommet (Graph *g, int *tab, int len) ; 
 
-// Calcule une couverture de G
-int *DONOTUSE_algoCouplage(Graph *G, int *tailleCouverture) ; 
 
 solution algoCouplage(Graph *G) ; 
 
 // Calcule une couverture de G, avec un algorithme glouton 
-int *DONOTUSE_algoGlouton(Graph *G, int *tailleCouverture) ; 
-
-
 solution algoGlouton(Graph *G) ; 
 
 // Retourne le sommet de degré maximum de G 

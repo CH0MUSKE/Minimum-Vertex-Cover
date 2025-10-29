@@ -209,7 +209,9 @@ Graph *retireEnsembleSommet (Graph *g, int *tab, int len) {
     for (int i = 0 ; i < len ; i++) {
         
         if (res) {
-            res = retireSommet(res, tab[i]) ; 
+            Graph *h = retireSommet(res, tab[i]) ; 
+            freeGraph(res);
+            res = h;
         }
         else {
             return res ; 

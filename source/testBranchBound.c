@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
         Graph *g = genereGraphAlea(20, 0.4) ; 
         solution so = branchementBorneCouplageAmelioreInit(g);
         solution s = branchementSimpleInit(g);
-        solution sol = branchementBorneCouplageInit(g);
+        solution sol = branchementBorneCouplageAmelioreDegMaxTestDeg1Init(g);
         solution solu = branchementBorneCouplageAmelioreDegMaxInit(g);
         a = s.cardinal;
         b = so.cardinal;
@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
         for(int i = 0; i <d; i++){
             printf("-%d-",solu.couverture[i]);
         }
-        printf("\n------ couplage -----\n");
+        printf("\n------ deg1 -----\n");
         for(int i = 0; i <c; i++){
             printf("-%d-",sol.couverture[i]);
         }

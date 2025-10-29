@@ -124,7 +124,96 @@ glouton n'est pas optimal, et n'est pas 1-approché.\\
 \subsubsection*{Partie 1}
 
 \subsubsection*{Partie 2}
-1. $b_3$ : on peut identifier le polynôme $x^2 + x + 2m = 2nx$, l'inégalité nous donne que : $2m \le |C| (2n - |C| - 1)$. 
+1.$b_1$ : Soit $S$ défini comme 
+\[
+S = \{ (v,e) \mid (v,e) \in C \times E \}.
+\]
+On a $|S| \geq m$ par définition de $C$.
+
+De plus,
+\[
+|S| = \sum_{v \in C} \deg(v),
+\]
+or par définition du degré maximal $\Delta$, on a $\deg(v) \leq \Delta$ pour tout $v \in C$.
+
+Ainsi,
+\[
+|S| \leq \sum_{v \in C} \Delta = |C| \cdot \Delta.
+\]
+
+En combinant les deux inégalités, on obtient :
+\[
+|C| \cdot \Delta \geq m \quad \Rightarrow \quad |C| \geq \frac{m}{\Delta}.
+\]
+
+Comme $|C| \in \mathbb{N}$, on a finalement :
+\[
+|C| \geq \left\lceil \frac{m}{\Delta} \right\rceil.
+\]
+
+$b_2$ : Soit un graphe $G=(V,E)$ et une couverture d'arêtes $C \subseteq V$. Par définition, $C$ est une couverture si et seulement si 
+\[
+\forall (u,v) \in E, \quad u \in C \text{ ou } v \in C.
+\]
+
+Ainsi, pour toute arête $(u,v) \in M \subseteq E$, on a nécessairement que
+\[
+u \in C \quad \text{ou} \quad v \in C,
+\]
+car chaque arête doit être couverte par au moins un sommet de $C$. //
+On en déduit donc que
+\[
+|C| \ge |M|.
+\]
+$b_3$ : On rappelle qu'un graphe complet $G$ à $n$ sommets possède $\dfrac{n(n-1)}{2}$ arêtes.
+
+En prenant le sous-graphe $G'$ ayant pour sommets $C$, celui-ci possède au plus 
+\[
+\dfrac{k(k-1)}{2} \quad \text{avec } k = |C|
+\]
+arêtes entre les sommets de $C$.
+
+Entre les sommets de $V \setminus C$ et ceux de $C$, on a au plus $k(n-k)$ arêtes.
+
+Par définition d’un couplage, on ne peut pas avoir d’arêtes entre sommets de $V \setminus C$.  
+Ainsi :
+\[
+m \leq \dfrac{k(k-1)}{2} + k(n-k).
+\]
+
+En fixant $m$ et en multipliant par $-2$, puis en développant, cette inégalité revient à résoudre l’inéquation du second degré :
+\[
+k^2 - (2n - 1)k + 2m \leq 0.
+\]
+
+Le discriminant vaut :
+\[
+\Delta = (2n - 1)^2 - 8m.
+\]
+
+Celui-ci est bien positif, car :
+\[
+m \leq \dfrac{n(n-1)}{2} \quad \Longleftrightarrow \quad 8m \leq 4(n^2 - n),
+\]
+et puisque $(2n - 1)^2 = 4n^2 - 2n$, cette inégalité est vérifiée pour tout $n \geq 0$.
+
+\medskip
+
+La solution de l’inéquation est donc :
+\[
+k \in 
+\left[
+\dfrac{(2n - 1) - \sqrt{(2n - 1)^2 - 8m}}{2} \; , \;
+\dfrac{(2n - 1) + \sqrt{(2n - 1)^2 - 8m}}{2}
+\right].
+\]
+
+\medskip
+
+On en conclut que :
+\[
+|C| \geq \dfrac{(2n - 1) - \sqrt{(2n - 1)^2 - 8m}}{2}.
+\]
 
 % Subfigures 
 
@@ -132,7 +221,31 @@ glouton n'est pas optimal, et n'est pas 1-approché.\\
 
 \subsubsection*{Partie 3}
 
-3.
+3. Soit $G = (V,E)$ un graphe, $u$ un sommet de degré $1$ et $C$ une couverture optimale de $G$.
+
+Comme $u$ est de degré $1$, il existe un sommet $v \in V$ tel que $(u,v) \in E$.
+
+\medskip
+
+Si $u \notin C$, il n'y a rien à montrer.
+
+\medskip
+
+Supposons que $u \in C$.  
+Comme $C$ est une couverture \emph{optimale}, on doit avoir $v \notin C$ (sinon, on pourrait retirer $u$ sans perdre la propriété de couverture).
+
+Or, comme $\deg(u) = 1$, le sommet $u$ ne couvre que l’arête $(u,v)$.
+
+En considérant :
+\[
+C' = (C \setminus \{u\}) \cup \{v\},
+\]
+on a :
+\[
+|C'| = |C| \quad \text{et} \quad C' \text{ couvre bien toutes les arêtes de } G.
+\]
+Ainsi, $C'$ est également une couverture optimale de $G$.//
+Il est donc toujours possible de trouver une couverture optimale qui ne contient pas le sommet $u$ de degré $1$.
 
 \subsubsection*{Partie 4}
 

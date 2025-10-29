@@ -15,7 +15,6 @@ CFLAGS  = -Wall -I. -g -Wextra -Wno-unused-parameter
 # sous-dossiers contenus après le -I, dans ce cas tout les sous-dossiers
 
 FILES = operationGraph operationTableau mesureFonction branchBound IOGraphe
-FILES = operationGraph operationTableau mesureFonction branchBound
 # L'ensemble des noms des fichiers intermédiaires 
 
 SRCS = $(patsubst %, $(SRC_DIR)/%.c, $(FILES))

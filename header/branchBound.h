@@ -7,6 +7,12 @@
 Applique l'algorithme de branchement, sachant que C représente les sommets déjà 
 retirés du graphe et n la taille du tableau des sommets retirés
 */ 
+
+typedef struct Reduction{
+    solution sol;
+    Graph *graph;
+}Reduction;
+
 solution branchementSimple(Graph *g, int *C, int n) ; 
 solution branchementSimpleInit(Graph *g) ;
 
@@ -25,7 +31,9 @@ solution branchementBorneCouplageAmelioreInit (Graph *g) ;
 
 solution branchementBorneCouplageAmelioreDegMaxInit(Graph *g);
 
+solution branchementBorneCouplageAmelioreDegMaxTestDeg1Init(Graph *g);
 
 
 solution *copieSolution (solution *s) ; 
 
+Reduction reductionDeg1Graph(Graph *g);

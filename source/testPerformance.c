@@ -19,40 +19,45 @@ int main(int argc, char** argv) {
     DureeMax : 2.500, TailleMax : 2300
     DureeMax : 3.000, TailleMax : 2450
 
+    Maximums : 
+    Branch : 20 
+    Branch : 25
+    Branch : 70 
+    Branch : 100 
+    Branch : 100
+
     */
 
-    double tempsMax = 2.0 ; 
-    int nbIntervalles = 5 ; 
-    int pas = 30 ; 
-    double p = 0.8 ; 
+    double tempsMax = 0.5 ; 
+    int nbIntervalles = 3 ; 
+    int pas = 5 ; 
+    double p = 0.5 ; 
+    int nbGraphes = 20 ; 
+    int nbPoints = 10 ; 
+    int maxSommets = 20 ;  
     FILE *f = fopen("data.txt", "w") ; 
 
 	if (argc == 5) {
 		tempsMax = atof(argv[1]) ; 
 		if (atoi(argv[2]) < 0) {
 			nbIntervalles = atoi(argv[2]) ; 
-		}
+		} 
 		if (atoi(argv[3]) < 0) {
-			pas = atoi(argv[3]) ; 
+            pas = atoi(argv[3]) ; 
 		}
 		if (atof(argv[4]) <= 0.0 && atof(argv[4]) <= 1.0) {
             p = atof(argv[4]) ; 
 		}
 	}
     
-    printf("Test de tailleMax pour algoGlouton avec tempsMax = %f\n", tempsMax) ; 
-    for (int i = 0 ; i < nbIntervalles ; i++) {
-        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 
-        tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoGlouton)) ; 
-    }
+    double *res = tempsMoyenAlgo(nbGraphes, nbPoints, p, maxSommets, branchementSimpleInit) ; 
 
-    printf("Test de tailleMax pour algoCouplage avec tempsMax = %f\n", tempsMax) ; 
-    for (int i = 0 ; i < nbIntervalles ; i++) {
-        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 
-        tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoCouplage)) ; 
+    for (int i = 0 ; i < nbPoints ; i++) {
+        fprintf(f, "%d, %.3f\n", (i+1) * (maxSommets / nbPoints), res[i]) ; 
     }
+    free(res) ; 
     /*
-    for (int i = 1 ; i < 15 ; i++) {
+    for (int i = 1 ; i < 25 ; i++) {
         
         Graph *g ; 
         
@@ -61,7 +66,7 @@ int main(int argc, char** argv) {
         clock_t end ;
         double temp = 0 ; 
         for (int k = 0 ; k < nbIntervalles ; k++) {
-            g = genereGraphAlea(i*pas, p) ; 
+            g = genereGraphAlea(i*pas, 0.2) ; 
             start = clock() ; 
             t = branchementBorneCouplageAmelioreDegMaxInit(g) ; 
             end = clock() ; 
@@ -73,7 +78,20 @@ int main(int argc, char** argv) {
         printf("%d\n", i) ; 
         
     }
+
     fclose(f) ; 
+    
+    printf("Test de tailleMax pour algoGlouton avec tempsMax = %f\n", tempsMax) ; 
+    for (int i = 0 ; i < nbIntervalles ; i++) {
+        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 
+        tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, branchementBorneCouplageInit)) ; 
+    }
+
+    printf("Test de tailleMax pour algoCouplage avec tempsMax = %f\n", tempsMax) ; 
+    for (int i = 0 ; i < nbIntervalles ; i++) {
+        printf("%.4f, %d\n",(i + 1.0)*(tempsMax / (double) nbIntervalles), 
+        tailleMaxGraphe((i + 1.0)*(tempsMax / (double) nbIntervalles), p, pas, algoCouplage)) ; 
+    }
 
 
     ====

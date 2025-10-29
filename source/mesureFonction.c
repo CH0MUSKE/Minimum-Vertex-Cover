@@ -45,6 +45,7 @@ double *tempsMoyenAlgo(int nbGraphes, int nbPoints, double p, int maxSommets, so
         }
         res[i] = res[i] / nbGraphes ; 
         nbSommets += (maxSommets / nbPoints) ; 
+        printf("Tour : %d\n", i) ; 
     }
     return res ;     
 }

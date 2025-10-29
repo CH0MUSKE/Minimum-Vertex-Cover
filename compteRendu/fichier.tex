@@ -44,10 +44,6 @@
 \vspace{1cm} %Add a 2cm space
 \hspace{2cm}
 
-\begin{abstract}
-Ceci est un bref résumé du contenu du document écrit en français.
-\end{abstract}
-
 \section{Introduction}
 Ce rapport présente un compte rendu du projet réalisé dans le cadre de l’UE COMPLEX, 
 dont le but était d'appliquer l'algo du branch and bound vu en cours pour résoudre 
@@ -92,54 +88,12 @@ une couverture de taille 10. Or une autre solution de taille inférieure serait 
 les sommets de $V_2$, puis $s_0$, ce qui donne une couverture de taille 9. Donc l'algorithme 
 glouton n'est pas optimal, et n'est pas 1-approché.\\
 
-2. 
-\begin{figure}
-\centering
-\begin{subfigure}{.4\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{Images/PerfAlgoGloutton2.png}
-\end{subfigure}%
-\begin{subfigure}{.4\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{Images/PerfAlgoGloutton5.png}
-\end{subfigure}
-\begin{subfigure}{.4\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Images/PerfAlgoGloutton8.png}
-\end{subfigure}
-\end{figure}
-
-\begin{figure}
-\centering
-\begin{subfigure}{.4\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{Images/PerfAlgoCouv2.png}
-\end{subfigure}%
-\begin{subfigure}{.4\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{Images/PerfAlgoCouv5.png}
-\end{subfigure}
-\begin{subfigure}{.4\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Images/PerfAlgoCouv8.png}
-\end{subfigure}
-\end{figure}
-
-\newpage
-
 3. Réduction de Stable de taille au moins n - kn à Couverture de taille plus k ? 
 
 \subsection{Exercice 4}
 
 \subsubsection*{Partie 1}
 
-2. \\
-En prenant comme nombre maximal de sommets $N_{max} = 20$, on obtient 
-le graphe suivant : 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width = 0.8\linewidth]{Images/PerfBranchSimple.png}
-\end{figure}
 
 \subsubsection*{Partie 2}
 1.$b_1$ : Soit $S$ défini comme 
@@ -265,7 +219,29 @@ on a :
 Ainsi, $C'$ est également une couverture optimale de $G$.//
 Il est donc toujours possible de trouver une couverture optimale qui ne contient pas le sommet $u$ de degré $1$.
 
-\subsubsection*{Partie 4}
+\section{Analyse théorique}
+ 
+\subsection*{Exercice 3}
 
-\[ \lim x =  \theta + \nombre{152383.52} \]
+2. 
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{Images/MaxCouplage.png}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{Images/MaxGlouton.png}
+\end{subfigure}
+\end{figure}
+On peut observer que dans les deux algorithmes la taille maximal est inversement proportionnelle 
+à la quantité d'arêtes présentes dans le graphe. Ceci est dû au fait que plus le graphe est dense, plus 
+on a d'arêtes à retirer pour chaque suppression de sommet, ce qui ralentit le programme. 
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.8\linewidth]{Images/PerfBranchementSimple.png}
+\end{figure}
 \end{document}

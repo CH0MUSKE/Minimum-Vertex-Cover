@@ -32,7 +32,7 @@ double *tempsMoyenAlgo(int nbGraphes, int nbPoints, double p, int maxSommets, so
     for (int i = 0 ; i < nbPoints ; i++) {
         res[i] = 0 ; 
         for (int j = 0 ; j < nbGraphes ; j++) {
-            g = genereGraphAlea(nbSommets, p) ; 
+            g = genereGraphAlea(nbSommets, 1/sqrt(nbSommets)) ; 
             
             clock_t start = clock();
             solution t = algo(g) ; 

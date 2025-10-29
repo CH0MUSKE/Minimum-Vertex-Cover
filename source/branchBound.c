@@ -8,6 +8,10 @@ solution branchementSimpleInit (Graph *G) {
     return branchementSimple(G, NULL, 0) ;    
 }
 
+/*
+même chose que branchementBorneCouplage 
+qui est commenté
+*/
 solution branchementSimple(Graph *g, int *C, int n){
 
     if(g -> nbAretes == 0){
@@ -130,25 +134,37 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
         free(C);
         return s;
     }
+    // On calcule une solution réalisable
     Graph *h = copieGraph(g);
     solution s = algoCouplage(h);
     freeGraph(h);
     solution sol = concatene_sol(s,C,n);
+    /*
+    Si la solution réalisable calculée est meilleure que celle 
+    qu'on avait déjà on la remplace sinon on continue
+    */ 
     if(sol.cardinal < meilleure_solution.cardinal){
         if(meilleure_solution.couverture != NULL){
             free(meilleure_solution.couverture);
         }
         meilleure_solution = copy_sol(sol);
     }
+    /*
+    concatene renvoie le pointeur passé en argument si C est NULL
+    donc c'est pour éviter le double free
+    */
     if(C != NULL){
         free(sol.couverture);
     }
     free(s.couverture);
 
+    //on prends une arete (au hasard), ici on prends le premier
     int *arete = uneArete(g);
     int u = arete[0];
     int v = arete[1];
     free(arete);
+
+    // on crée nos 2 branches 
     Graph *g_sans_u = retireSommet(g,u);
     Graph *g_sans_v = retireSommet(g,v);
     int *C_u = malloc(sizeof(int) * (n+1));
@@ -162,12 +178,14 @@ solution branchementBorneCouplage(Graph *g, int *C, int n){
     if(C != NULL){
         free(C);
     }
+    // on rappelle la fonction sur nos 2 branches qu'on a crée
     solution branche_u = branchementBorneCouplage(g_sans_u,C_u,n+1);
     solution branche_v = branchementBorneCouplage(g_sans_v,C_v, n+1);
 
     freeGraph(g_sans_u);
     freeGraph(g_sans_v);
 
+    // on compare les solutions pour prendre le minimum
     if(branche_u.cardinal < branche_v.cardinal){
         free(branche_v.couverture);
         return branche_u;
@@ -359,6 +377,13 @@ solution branchementBorneCouplageAmelioreDegMaxInit(Graph *g) {
     return res ;     
 }
 
+/*
+On supprime du graphe G tous les sommets u,v
+tel que (u,v) appartient à V et deg(u) = 1 ou 
+deg(v) = 1 et on ajoute dans un tableau le sommet qui est voisin de celui est de degré 1.
+On recommence jusqu'à qu'aucun sommet ne soit de degré 1.
+Sortie: le graphe G sans sommet de degré 1 avec le tableau
+*/
 Reduction reductionDeg1Graph(Graph *g){
     int flag = 1;
     Reduction r;

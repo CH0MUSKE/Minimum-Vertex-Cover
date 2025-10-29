@@ -31,10 +31,10 @@ int main(int argc, char** argv) {
     double tempsMax = 0.5 ; 
     int nbIntervalles = 3 ; 
     int pas = 5 ; 
-    double p = 0.5 ; 
+    double p = 0.8 ; 
     int nbGraphes = 20 ; 
     int nbPoints = 10 ; 
-    int maxSommets = 20 ;  
+    int maxSommets = 25 ;  
     FILE *f = fopen("data.txt", "w") ; 
 
 	if (argc == 5) {
@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 		}
 	}
     
-    double *res = tempsMoyenAlgo(nbGraphes, nbPoints, p, maxSommets, branchementSimpleInit) ; 
+    double *res = tempsMoyenAlgo(nbGraphes, nbPoints, p, maxSommets, branchementBorneCouplageInit) ; 
 
     for (int i = 0 ; i < nbPoints ; i++) {
         fprintf(f, "%d, %.3f\n", (i+1) * (maxSommets / nbPoints), res[i]) ; 

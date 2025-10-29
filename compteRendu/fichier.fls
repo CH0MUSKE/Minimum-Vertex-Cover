@@ -72,6 +72,8 @@ INPUT c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
 INPUT c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
 INPUT c:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty
 INPUT c:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT c:/texlive/2025/texmf-dist/tex/latex/float/float.sty
+INPUT c:/texlive/2025/texmf-dist/tex/latex/float/float.sty
 INPUT c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT ./fichier.aux
@@ -146,6 +148,11 @@ INPUT ./Images/PerfAlgoCouv8.png
 INPUT ./Images/PerfAlgoCouv8.png
 INPUT c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc
+INPUT ./Images/PerfBranchSimple.png
+INPUT ./Images/PerfBranchSimple.png
+INPUT ./Images/PerfBranchSimple.png
+INPUT ./Images/PerfBranchSimple.png
+INPUT ./Images/PerfBranchSimple.png
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecti1000.tfm
 INPUT fichier.aux
 INPUT c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb

@@ -1,12 +1,13 @@
 # Fdb version 4
-["pdflatex"] 1761759495.31838 "c:/Users/Andy/Documents/Shared_Files_Folder/projComplex/compteRendu/fichier.tex" "fichier.pdf" "fichier" 1761759496.04673 0
+["pdflatex"] 1761762131.3993 "c:/Users/Andy/Documents/Shared_Files_Folder/projComplex/compteRendu/fichier.tex" "fichier.pdf" "fichier" 1761762132.13936 0
   "Images/PerfAlgoCouv2.png" 1761653256 42021 aa791ae137b5380c6caf97f6070d16df ""
   "Images/PerfAlgoCouv5.png" 1761653265 42055 c09d4c23fa2370ae1cef86bb750b708d ""
   "Images/PerfAlgoCouv8.png" 1761653272 42648 d0fb9bfdd92ab0448a8b1edb458d4e44 ""
   "Images/PerfAlgoGloutton2.png" 1761601875 42363 037966e90e73676c06573e83c5716c41 ""
   "Images/PerfAlgoGloutton5.png" 1761652881 42432 682a4d60eb4ca4f496c5b9911b1bc368 ""
   "Images/PerfAlgoGloutton8.png" 1761652892 42364 32c6f6df72f8d5ab6c314f4917ebb562 ""
-  "c:/Users/Andy/Documents/Shared_Files_Folder/projComplex/compteRendu/fichier.tex" 1761759492 7217 a96e4f9c0e22935549718ea552ef4096 ""
+  "Images/PerfBranchSimple.png" 1761761907 35049 7aea51938d56480eaf73f862cdc44b3c ""
+  "c:/Users/Andy/Documents/Shared_Files_Folder/projComplex/compteRendu/fichier.tex" 1761762130 7461 b65e00ccba130f2ff56dcb8ccf4b67d7 ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1760716187 2971 def0b6c1f0b107b3b936def894055589 ""
   "c:/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1760716704 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecbx0900.tfm" 1760716485 3584 1a7de6c99457381c64abc1a7c545505f ""
@@ -68,6 +69,7 @@
   "c:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty" 1760716083 12494 0c0cdb824278a4d51cefeb2e79901315 ""
   "c:/texlive/2025/texmf-dist/tex/latex/carlisle/scalefnt.sty" 1760716085 1360 df2086bf924b14b72d6121fe9502fcdb ""
   "c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1760716544 13886 d1306dcf79a944f6988e688c1785f9ce ""
+  "c:/texlive/2025/texmf-dist/tex/latex/float/float.sty" 1760716684 6749 16d2656a1984957e674b149555f1ea1d ""
   "c:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty" 1760716768 41601 9cf6c5257b1bc7af01a58859749dd37a ""
   "c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1760716826 1224 978390e9c2234eab29404bc21b268d1e ""
   "c:/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def" 1760716827 19626 23e2822b9b2b5005f4c549ca98b9334d ""
@@ -84,9 +86,9 @@
   "c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1760718888 5574153 af86687748baf417d9e7d549313527be ""
   "c:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1760718989 3629072 34f1978d9a20f6633889792c1b81dd60 ""
   "c:/texlive/2025/texmf.cnf" 1760718876 713 e69b156964470283e0530f5060668171 ""
-  "fichier.aux" 1761759495 677 10d76cf723263c1d3957cbb154967c34 "pdflatex"
-  "fichier.tex" 1761759492 7217 a96e4f9c0e22935549718ea552ef4096 ""
-  "fichier.toc" 1761759495 321 8ec8e4b80cb4913b6ea0a39bab448e07 "pdflatex"
+  "fichier.aux" 1761762132 677 10d76cf723263c1d3957cbb154967c34 "pdflatex"
+  "fichier.tex" 1761762130 7461 b65e00ccba130f2ff56dcb8ccf4b67d7 ""
+  "fichier.toc" 1761762132 321 8ec8e4b80cb4913b6ea0a39bab448e07 "pdflatex"
   (generated)
   "fichier.aux"
   "fichier.log"

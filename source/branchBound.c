@@ -10,20 +10,18 @@ solution branchementSimpleInit (Graph *G) {
 
 solution branchementSimple(Graph *g, int *C, int n){
 
-    solution sol;
     if(g -> nbAretes == 0){
+        solution sol;
         sol.cardinal = n;
-        sol.couverture = C;
+        sol.couverture = copieTab(C,n);
         return sol;
     }
     int *arete = uneArete(g);
     int u = arete[0];
     int v = arete[1];
     free(arete);
-    Graph *gcpy1 = copieGraph(g);
-    Graph *gcpy2 = copieGraph(g);
-    Graph *g_sans_u = retireSommet(gcpy1,u);
-    Graph *g_sans_v = retireSommet(gcpy2,v);
+    Graph *g_sans_u = retireSommet(g,u);
+    Graph *g_sans_v = retireSommet(g,v);
     int *C_u = malloc(sizeof(int) * (n+1));
     int *C_v = malloc(sizeof(int) * (n+1));
     if(C != NULL){
@@ -32,14 +30,14 @@ solution branchementSimple(Graph *g, int *C, int n){
     }
     C_u[n] = u;
     C_v[n] = v;
-    if(C != NULL){
-        free(C);
-    }
+
     solution branche_u = branchementSimple(g_sans_u,C_u,n+1);
     solution branche_v = branchementSimple(g_sans_v,C_v, n+1);
 
     freeGraph(g_sans_u);
     freeGraph(g_sans_v);
+    free(C_u);
+    free(C_v);
 
     if(branche_u.cardinal < branche_v.cardinal){
         free(branche_v.couverture);

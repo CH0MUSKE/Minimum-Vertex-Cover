@@ -88,15 +88,17 @@ Graph *creeGraph(int n) {
 
 void freeGraph (Graph *g) {
     if (g) {
-        free(g->degreSommet) ; 
-        free(g->tabSommets) ; 
-        
-        for (int i = 0 ; i < g->nbSommets ; i++) {
-            if (g->tabAdjacence[i]) {
-                free(g->tabAdjacence[i]) ; 
+        if(g ->degreSommet)free(g->degreSommet) ; 
+        if(g -> tabSommets)free(g->tabSommets) ; 
+
+        if(g -> tabAdjacence){
+            for (int i = 0 ; i < g->nbSommets ; i++) {
+                if (g->tabAdjacence[i]) {
+                    free(g->tabAdjacence[i]) ; 
+                }
             }
+            free(g -> tabAdjacence);
         }
-        free(g -> tabAdjacence);
 
         free(g) ; 
     }
